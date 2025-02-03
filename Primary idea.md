@@ -1,1 +1,1 @@
-Ai analysis and prediction of cancer likelyhood and preventions methods
+Indsamling og analyse af cancer patienters livstilsforhold, samt genetiske forhold (cancer type ikke besluttet på nuvlrende tidspunkt) for opbygning af en model som kan bruges til forudsigning af cancer, samt hjælp til minimering
