@@ -20,4 +20,6 @@ Døv tolks app:
 
 Final idea - Sociale media 
 Mål gruppe: Computer nørder 
-data indsamling: hvor lang tid bruger brugeren på hver 
+form: reddit like moderator approval, subs
+data: Hvor lang tid bruger, brugeren på hver forum og hvilken 
+Posible names: 4Nerd, Nerd365, gnuf. 
