@@ -12,3 +12,12 @@ Cancer:
 
 Uni valgs app:
   sammenligne ingeniørers karriere fra forskellige universiteter, for at tegne et billede for den studerende, hvor det ville være ideelt for netop dem at studere
+
+
+Skrald detektion: 
+
+Døv tolks app: 
+
+Final idea - Sociale media 
+Mål gruppe: Computer nørder 
+data indsamling: hvor lang tid bruger brugeren på hver 
