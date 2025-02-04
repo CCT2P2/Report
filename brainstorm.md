@@ -20,6 +20,40 @@ Døv tolks app:
 
 Final idea - Sociale media 
 Mål gruppe: Computer nørder 
-form: reddit like moderator approval, subs
+form: reddit like, but moderator approval, subs
 data: Hvor lang tid bruger, brugeren på hver rum og hvilken 
 Posible names: 4Nerd, Nerd365, gnuf. 
+
+Features: 
+1.poststing 
+- comments
+- like/dislike (private og cringe advarelse), double like
+- share 
+- only pictures and text. 
+- notifikation organisization
+- polls
+- links(embeds)
+  
+  
+2.Communities
+- mod approved
+- colection of comunity
+- lists/collection 
+
+3. Bruger-profil
+- blocking
+- customization
+- saved post (lists)
+- Report 
+
+4. Seach bar
+- 
+
+5. Easter eggs
+- 
+   
+6. site visual customsization
+- 
+
+
+
