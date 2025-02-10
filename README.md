@@ -19,3 +19,6 @@ annonymitet videst muligt, dog stadig med login or bruger profiler
 
 # forslag
 - profil customization with pre defined colour paletes and more
+
+# problemstilling
+hvordan kan man skabe et socialt media med fokus på computer og it enthusiaster, samt forbedre nuværende sociale mediers UX
