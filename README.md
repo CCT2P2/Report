@@ -5,8 +5,8 @@ Indsamling og analyse af cancer patienters livstilsforhold, samt genetiske forho
 Social medie
 målgruppen: computer enthusiaster
 alder: 16+
-frontend: C#, blazor, tailwind
-backend; sqllite (db), TypeScript
+frontend: react, tailwind, vite, zustand, zod
+backend; sqllite (db), c#
 reddit like forum (GNUF)
 annonymitet videst muligt, dog stadig med login or bruger profiler
 
