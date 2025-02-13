@@ -2,13 +2,13 @@ Indsamling og analyse af cancer patienters livstilsforhold, samt genetiske forho
 
 # refinement
 -------------------
-Social medie
-målgruppen: computer enthusiaster
-alder: 16+
-frontend: react, tailwind, vite, zustand, zod
-backend; sqllite (db), c#
-reddit like forum (GNUF)
-annonymitet videst muligt, dog stadig med login or bruger profiler
+- Social medie
+- målgruppen: computer enthusiaster
+- alder: 16+
+- frontend: react, tailwind, vite, zustand, zod
+- backend; sqllite (db), c#
+- reddit like forum (GNUF)
+- annonymitet videst muligt, dog stadig med login or bruger profiler
 
 # Irritationspunkter
 - ingen like/dislike ratio | lav en
@@ -24,10 +24,10 @@ annonymitet videst muligt, dog stadig med login or bruger profiler
 hvordan kan man skabe et socialt media med fokus på computer og it enthusiaster, samt forbedre nuværende sociale mediers UX
 
 # tools
-code2flow.diddle
-krita
-git
-vim/zed/jetbrain/vscode
-discord
-typst
-k3s
+- code2flow
+- krita
+- git
+- vim/zed/jetbrain/vscode
+- discord
+- typst
+- k3s
