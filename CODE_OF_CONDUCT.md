@@ -10,3 +10,4 @@
 10. 1st fortagelse forbigås, 2nd fortagelse er gruppesnak, 3rd foretagelse er vejleder.
 11. Strengt profesionelle måder (pauser tilladt)
 12. Discord kanalen skal holdes ren og profesionel
+13. Referat af møder hvis gruppemedlem ikke tilstede
