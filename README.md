@@ -31,3 +31,4 @@ hvordan kan man skabe et socialt media med fokus på computer og it enthusiaster
 - discord
 - typst
 - k3s
+- plantuml
