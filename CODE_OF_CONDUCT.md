@@ -11,6 +11,6 @@
 11. Strengt profesionelle måder (pauser tilladt)
 12. Discord kanalen skal holdes ren og profesionel
 13. Referat af møder hvis gruppemedlem ikke tilstede
-14. IDE:
-     Frontend: Webstorm
-     Backend: free choice
+14. IDE:  
+     Frontend: Webstorm  
+     Backend: free choice  
