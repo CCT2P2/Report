@@ -21,7 +21,7 @@ Indsamling og analyse af cancer patienters livstilsforhold, samt genetiske forho
 - profil customization with pre defined colour paletes and more
 
 # problemstilling
-hvordan kan man skabe et socialt media med fokus på computer og it enthusiaster, samt forbedre nuværende sociale mediers UX
+hvordan kan man skabe et socialt media med fokus på anonumitet, computer og it enthusiaster, samt forbedre nuværende sociale mediers UX
 
 # tools
 - code2flow
