@@ -14,48 +14,48 @@ API Auth Method: Token: 64-bit
 # 3. Database Schema  
   ## 3.1 Community  
   ```
-  Column name    Type       Constraints                           Description
-  -------------- ---------- ------------------------------------- --------------------------------------
-  ID             INT        PRIMARY KEY                           Unique Identifier
-  NAME           TEXT       UNIQUE, NOT NULL                      Community Name
-  Description    TEXT       CHECK (LENGTH(description) < 2000)    Community description
-  IMG_PATH       TEXT                                             URL to community image
-  MEMBER_COUNT   INT        DEFAULT 0, NOT NULL                   Number of members
-  TAGS           INT []     NOT NULL                              Content tags
-  POST_IDs       INT []                                           Array of post ID's (FK. to Posts.ID)
+  Column name    Type      Constraints                                     Description
+  -------------- --------- ----------------------------------------------- --------------------------------------
+  ID             INT       PRIMARY KEY                                     Unique Identifier
+  NAME           TEXT      UNIQUE. NOT NULL. CHECK (LENGTH(NAME) \< 100)   Community Name
+  Description    TEXT      CHECK (LENGTH(description) \< 2000)             Community description
+  IMG_PATH       TEXT                                                      URL to community image
+  MEMBER_COUNT   INT       DEFAULT 0. NOT NULL                             Number of members
+  TAGS           INT\[\]   NOT NULL                                        Content tags
+  POST_IDs       INT\[\]                                                   Array of post ID\'s (FK to posts.id)
   ```
 
 ## 3.2 User  
   ```
-  Column Name     Type       Constraints               Description
-  --------------- ---------- ------------------------- ---------------------------------------------
-  ID              INT        PRIMARY KEY               Unique Identifier
-  EMAIL           TEXT       UNIQUE, NOT NULL          User's Email
-  USERNAME        TEXT       UNIQUE, NOT NULL          Unique Username
-  PASSWORD        TEXT       NOT NULL                  Hashed Password (SHA256)
-  IMG_PATH        TEXT                                 URL TO PP
-  POST_IDs        INT []                               Array of post IDs (FK. to Posts.ID)
-  COMMUNITY_IDs   INT []                               Array of communities (FK. to Communities.ID)
-  ADMIN           BOOLEAN    NOT NULL, DEFAULT FALSE   ADMIN FLAG
-  TAGS            INT []                               Array of tags for content recommendation
+  Column Name     Type      Constraints                                         Description
+  --------------- --------- --------------------------------------------------- ---------------------------------------------
+  ID              INT       PRIMARY KEY                                         Unique Identifier
+  EMAIL           TEXT      UNIQUE. NOT NULL                                    User\'s Email
+  USERNAME        TEXT      UNIQUE. NOT NULL. CHECK (LENGTH(USERNAME) \< 100)   Unique Username
+  PASSWORD        TEXT      NOT NULL. CHECK (LENGTH(PASSWORD) \< 1000)          Hashed Password (sha256)
+  IMG_PATH        TEXT                                                          URL TO PP
+  POST_IDs        INT\[\]                                                       Array of post IDs (FK to posts.id)
+  COMMUNITY_IDs   INT\[\]                                                       Array of communities (FK to communities.id)
+  ADMIN           BOOL      NOT NULL. DEFAULT FALSE                             ADMIN FLAG
+  TAGS            INT\[\]                                                       Array of tags for content recommendation
   ```
 
 ## 3.3 Posts  
   ```
   Column Name    Type        Constraints                        Description
   -------------- ----------- ---------------------------------- ---------------------------------------------------------
-  POST_ID        INT         PRIMARY KEY                        Unique Identifier
-  TITLE          TEXT        NOT NULL, CHECK (LENGTH < 1000)    Post title (if comment, title should be "cmt_{post_id}")
-  MAIN_TEXT      TEXT        CHECK (LENGTH < 100k)              Post body
+  POST_ID        INT         UNIQUE. NOT NULL                   Unique Identifier
+  TITLE          TEXT        NOT NULL. CHECK (LENGHT \< 1000)   Post title
+  MAIN_TEXT      TEXT        CHECK (LENGTH \< 100k)             Post body
   AUTH_ID        INT         NOT NULL                           Author ID (FK. User.ID)
   COM_ID         INT         NOT NULL                           Community ID (FK. Community.ID)
-  TIMESTAMP      TIMESTAMP   NOT NULL                           Time of post (for sorting purpose)
-  LIKES          INT         NOT NULL, DEFAULT 0                Likes on post
-  DISLIKES       INT         NOT NULL, DEFAULT 0                Dislikes on post
+  TIMESTAMP      INT         NOT NULL                           Time of post
+  LIKES          INT         NOT NULL. DEFAULT 0                Likes on post
+  DISLIKES       INT         NOT NULL. DEFAULT 0                Dislikes on post
   POST_ID_REF    INT                                            Refference to original post (for reposts) (FK. Post.ID)
-  COMMENT_FLAG   BOOLEAN     NOT NULL                           Indicates comment instead of post
-  COMMENT_CNT    INT         NOT NULL, DEFAULT 0                Comment count
-  Comments       INT []                                         Array of post id's for comments (FK. Post.ID)
+  COMMENT_FLAG   BOOL        NOT NULL                           Indicates comment instead of post
+  COMMENT_CNT    INT         NOT NULL. DEFAULT 0                Comment count
+  Comments       INT\[\]                                        Array of post id\'s for comments (FK. Post.ID)
   ```
 if POST_ID_REF is set, this indicates repost by default UNLESS COMMENT_FLAG is set too. COMMENT_FLAG cannot be set without POST_ID_REF  
 
