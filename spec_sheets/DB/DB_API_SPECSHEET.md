@@ -1,7 +1,7 @@
 # 1. DB API specsheet  
-Time: 17-03-2024 @ 11:43 
-Author: Sebastian Lindau-Skands @ GNUF | Backend  
-Reciever: GNUF | DB Team  
+Time: 17-03-2024 @ 11:43   
+Author: Sebastian Lindau-Skands @ GNUF | Backend    
+Reciever: GNUF | DB Team    
 Version: 1.5.2 
 
 # 2. Overview  
