@@ -1,8 +1,8 @@
 # 1. DB API specsheet  
-Time: 13-03-2024 @ 14:59  
+Time: 17-03-2024 @ 11:25 
 Author: Sebastian Lindau-Skands @ GNUF | Backend  
 Reciever: GNUF | DB Team  
-Version: 1.4  
+Version: 1.5 
 
 # 2. Overview  
 DB: sqlite  
@@ -98,7 +98,7 @@ Response:
   ```
 ## 4.2 User Management  
 ### 4.2.1 Get User Profile  
-Endpoint: `GET /api/user/{user_id}`  
+Endpoint: `GET /api/user/profile/{user_id}`  
 Desc: Retrieve user data  
 Response:  
 ```json
@@ -114,26 +114,39 @@ Response:
   }
 ```
 ### 4.2.2 Delete User Account  
-Endpoint: `DELETE /api/user/{user_id}`  
+Endpoint: `DELETE /api/user/remove/{user_id}`  
 desc: Deletes the account  
 Response: `200 (ok)`  
 
-### 4.2.3 Update User Profile  
-Endpoint: `PUT /api/user/{user_id}`  
+### 4.2.3 Update User Profile  (user)
+Endpoint: `PUT /api/user/update/user/{user_id}`    
 desc: Updates user profile  
 Request body:  
 ```json
   {
     "img_path": "string",
     "password": "string",
-    "communities": ["INT"]
   }
 ```
 Response: `200 (OK)`  
 
+### 4.2.4 Update User Profile (backend)
+Endpoint: `PUT /api/user/update/backend/{user_id}`  
+desc: update backend parameters  
+Request body:
+```json
+  {
+    "communities" : [INT],
+    "POST_IDs" : [INT],
+    "TAGS" : [INT]
+  }
+```
+
+Response: `200 (OK)`
+
 ## 4.3 Community management  
 ### 4.3.1 Create community  
-Endpoint: `POST /api/community`<br>  
+Endpoint: `POST /api/community/create`<br>  
 desc: Creates a community<br>  
 Request body:  
 ```json
@@ -153,7 +166,7 @@ Response:
 ```
 
 ### 4.3.2 Get community  
-Endpoint: `GET /api/community/{community_id}`  
+Endpoint: `GET /api/community/details/{community_id}`  
 desc: Fetches details of community  
 Response:  
 ```json
@@ -169,7 +182,7 @@ Response:
 ```
 
 ### 4.3.3 Update community details  
-Endpoint: `PUT /api/community/{community_id}`  
+Endpoint: `PUT /api/community/update/details/{community_id}`  
 desc: updates details and image of community (not membercount)  
 request body:  
 ```json
@@ -182,7 +195,7 @@ request body:
 Response: `200 (ok)`  
 
 ### 4.3.4 Update community member  
-Endpoint: `PUT /api/community/{community_id}`  
+Endpoint: `PUT /api/community/update/members/{community_id}`  
 desc: Updates member count of community  
 Request body:  
 ```json
@@ -194,13 +207,13 @@ Request body:
 Response: `200 (ok)`  
 
 ### 4.3.5 Delete community  
-Endpoint: `DELETE /api/community/{community_id}`  
+Endpoint: `DELETE /api/community/remove/{community_id}`  
 desc: deletes the community  
 Response: `200 (ok)`  
 
 ## 4.4 Post management  
 ### 4.4.1 Create post  
-Endpoint: `POST /api/post`  
+Endpoint: `POST /api/post/create`  
 desc: Create a new post  
 Request body:  
 ```json
@@ -221,7 +234,7 @@ Response:
 ```
 
 ### 4.4.2 Get post  
-Endpoint: `GET /api/post/{post_id}`  
+Endpoint: `GET /api/post/view/{post_id}`  
 desc: fetch all details about post  
 Response:  
 ```json
@@ -242,7 +255,7 @@ Response:
 ```
 
 ### 4.4.3 Update post  
-Endpoint: `PUT /api/post/{post_id}`  
+Endpoint: `PUT /api/post/update/{post_id}`  
 desc: Edits post  
 Request:  
 ```json
@@ -253,13 +266,13 @@ Request:
 ```
 
 ### 4.4.4 Delete post  
-Endpoint: `DELETE /api/post/{post_id}`  
+Endpoint: `DELETE /api/post/remove/{post_id}`  
 Desc: Deletes post  
 Response: `200 (ok)`  
 
 ## 4.5 Interactions  
 ### 4.5.1 Like / Dislike  
-Endpoint `PUT /api/post/{post_id}`  
+Endpoint `PUT /api/post/vote/{post_id}`  
 Desc: allows backend to modify like/dislike  
 Request body:  
 ```json
@@ -273,7 +286,7 @@ deletion of like and dislike will be handled via same endpoint
 Response: `200 (ok)`  
 
 ### 4.5.2 Comments  
-Endpoint `PUT /api/post/{post_id}`  
+Endpoint `PUT /api/post/comments/{post_id}`  
 Desc: Adds ref to comment post to origin post  
 Request body:  
 ```json
