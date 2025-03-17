@@ -1,7 +1,7 @@
 Column Name,Type,Constraints,Description
 POST_ID,INT,UNIQUE. NOT NULL,Unique Identifier
-TITLE,TEXT,NOT NULL. CHECK (LENGHT < 1000),Post title
-MAIN_TEXT,TEXT,CHECK (LENGTH < 100k),Post body
+TITLE,TEXT,NOT NULL. CHECK (LENGHT < 100),Post title
+MAIN_TEXT,TEXT,CHECK (LENGTH < 10k),Post body
 AUTH_ID,INT,NOT NULL,Author ID (FK. User.ID)
 COM_ID,INT,NOT NULL,Community ID (FK. Community.ID)
 TIMESTAMP,TIMESTAMP,NOT NULL,Time of post
