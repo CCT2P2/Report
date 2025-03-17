@@ -1,8 +1,8 @@
 # 1. DB API specsheet  
-Time: 17-03-2024 @ 11:25 
+Time: 17-03-2024 @ 11:43 
 Author: Sebastian Lindau-Skands @ GNUF | Backend  
 Reciever: GNUF | DB Team  
-Version: 1.5 
+Version: 1.5.2 
 
 # 2. Overview  
 DB: sqlite  
@@ -181,7 +181,7 @@ Response:
   }
 ```
 
-### 4.3.3 Update community details  
+### 4.3.3 Update community (user) 
 Endpoint: `PUT /api/community/update/details/{community_id}`  
 desc: updates details and image of community (not membercount)  
 request body:  
@@ -194,13 +194,15 @@ request body:
 
 Response: `200 (ok)`  
 
-### 4.3.4 Update community member  
-Endpoint: `PUT /api/community/update/members/{community_id}`  
+### 4.3.4 Update community (backend)  
+Endpoint: `PUT /api/community/update/backend/{community_id}`  
 desc: Updates member count of community  
 Request body:  
 ```json
   {
-    "member_count": "int"
+    "member_count": "int",
+    "TAGS": ["INT"],
+    "POST_IDs": ["INT"]
   }
 ```
 
@@ -254,8 +256,8 @@ Response:
   }
 ```
 
-### 4.4.3 Update post  
-Endpoint: `PUT /api/post/update/{post_id}`  
+### 4.4.3 Update post (user) 
+Endpoint: `PUT /api/post/update/user/{post_id}`  
 desc: Edits post  
 Request:  
 ```json
@@ -264,8 +266,22 @@ Request:
     "main_text": "string",
   }
 ```
+### 4.4.4 Update Post (backend)
+Endpoint: `PUT /api/post/update/backend/{post_id}`  
+desc: Update backend post descriptors  
+Request body:
+```json
+  {
+    "COMMENT_CNT": "INT",
+    "LIKES": "INT",
+    "DISLIKES": "INT",
+    "COMMENTS": "[string]"
+  }
+```
 
-### 4.4.4 Delete post  
+Response: `200 (ok)`  
+
+### 4.4.5 Delete post  
 Endpoint: `DELETE /api/post/remove/{post_id}`  
 Desc: Deletes post  
 Response: `200 (ok)`  
