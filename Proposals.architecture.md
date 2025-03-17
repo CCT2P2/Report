@@ -1,7 +1,7 @@
-*Subject:* GNUF Project – Server Stack and API Architecture Proposal  
-*Affecting:* GNUF | Database, GNUF | Backend  
-*Date:* 17-03-2025  
-*To be discussed:* 20-03-2025  
+**Subject:** GNUF Project – Server Stack and API Architecture Proposal  
+**Affecting:** GNUF | Database, GNUF | Backend  
+**Date:** 17-03-2025  
+**To be discussed:** 20-03-2025  
 
 In preparation for the upcoming report and exam, and to streamline the development and deployment process, the following proposals are submitted for consideration. These proposals focus on simplifying the current setup while retaining flexibility for future scalability and reference.  
 
