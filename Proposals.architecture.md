@@ -5,7 +5,7 @@
 
 In preparation for the upcoming report and exam, and to streamline the development and deployment process, the following proposals are submitted for consideration. These proposals focus on simplifying the current setup while retaining flexibility for future scalability and reference.  
 
-# Server Stack
+# 1. Server Stack 
 ## Migration from K3s to Docker
 
 While K3s remains a preferred deployment option for its scalability and real-world relevance, the limited experience with Kubernetes among the team members has led to the proposal of migrating to a Docker-based setup, utilizing Portainer for GUI-based container management.  
@@ -16,7 +16,7 @@ This migration aims to simplify configuration and reduce overhead during develop
 
 To support secure and flexible access to the server infrastructure from any location, it is proposed to implement a Nebula VPN overlay network. This enables staff and testers to interact with the GNUF platform outside of campus constraints, enhancing development flexibility and user testing.  
 
-# API and Database Architecture
+# 2. API and Database Architecture
 
 There are two proposed options regarding the integration of SQLite and the API, each with its own set of advantages and trade-offs. The goal is to determine the most suitable setup for our current needs while documenting options for future scalability.  
 Option A: Maintain Current Setup – SQLite in a Separate Container with Network Access via API  
