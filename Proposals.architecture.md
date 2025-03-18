@@ -37,7 +37,7 @@ Option A: Maintain Current Setup – SQLite in a Separate Container with Network
 
 Option B: Consolidate – Move SQLite Inside Backend Container (Local Access)  
 
-    Description: API would be scrapped, endpoint management (database.cs) would be migrated to backend.cs, and SQLite would be moved inside the backend container. This consolidation simplifies the setup and improves performance by leveraging SQLite's local file access optimization.  
+    Description: API would be be repurposed for frontend communication, endpoint management (database.cs) would be migrated to backend.cs, and SQLite would be moved inside the backend container. This consolidation simplifies the setup and improves performance by leveraging SQLite's local file access optimization.  
 
   Pros:  
       Simplified setup — no need for container networking or extra ports.  
