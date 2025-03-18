@@ -12,6 +12,7 @@ Dedicated com-port for API: 9012
 API Auth Method: Token: 64-bit  
 
 # 3. Database Schema  
+Due to an SQLite constraint, [] means a string formated in CSV
   ## 3.1 Community  
   ```
   Column name    Type      Constraints                                     Description
@@ -32,7 +33,7 @@ API Auth Method: Token: 64-bit
   ID              INT       PRIMARY KEY                                         Unique Identifier
   EMAIL           TEXT      UNIQUE. NOT NULL                                    User\'s Email
   USERNAME        TEXT      UNIQUE. NOT NULL. CHECK (LENGTH(USERNAME) \< 100)   Unique Username
-  PASSWORD        TEXT      NOT NULL. CHECK (LENGTH(PASSWORD) \< 1000)          Hashed Password (sha256)
+  PASSWORD        TEXT      NOT NULL. CHECK (LENGTH(PASSWORD) \< 500)          Hashed Password (sha256)
   IMG_PATH        TEXT                                                          URL TO PP
   POST_IDs        INT\[\]                                                       Array of post IDs (FK to posts.id)
   COMMUNITY_IDs   INT\[\]                                                       Array of communities (FK to communities.id)
@@ -44,9 +45,9 @@ API Auth Method: Token: 64-bit
   ```
   Column Name    Type        Constraints                        Description
   -------------- ----------- ---------------------------------- ---------------------------------------------------------
-  POST_ID        INT         UNIQUE. NOT NULL                   Unique Identifier
-  TITLE          TEXT        NOT NULL. CHECK (LENGHT \< 1000)   Post title
-  MAIN_TEXT      TEXT        CHECK (LENGTH \< 100k)             Post body
+  POST_ID        INT         PRIMARY KEY                        Unique Identifier
+  TITLE          TEXT        NOT NULL. CHECK (LENGHT \< 100)    Post title
+  MAIN_TEXT      TEXT        CHECK (LENGTH \< 10k)              Post body
   AUTH_ID        INT         NOT NULL                           Author ID (FK. User.ID)
   COM_ID         INT         NOT NULL                           Community ID (FK. Community.ID)
   TIMESTAMP      INT         NOT NULL                           Time of post
@@ -60,10 +61,10 @@ API Auth Method: Token: 64-bit
 if POST_ID_REF is set, this indicates repost by default UNLESS COMMENT_FLAG is set too. COMMENT_FLAG cannot be set without POST_ID_REF  
 
 # 4. API Endpoints  
+limit wherever applicable, to prevent misuse
 ## 4.1 Authentication  
 ### 4.1.1 User Login  
 Endpoint: `POST /api/auth/login`  
-Desc: Auth user and return access token  
 Request body:  
   ```json
     {
@@ -77,7 +78,6 @@ Response:
       "user_id": "INT"
     }
   ```
-if user not found, refer to "5.1 HTTP codes"  
 
 ### 4.1.2 User Registration  
 Endpoint: `POST /api/auth/register`  
@@ -130,7 +130,7 @@ Request body:
 ```
 Response: `200 (OK)`  
 
-### 4.2.4 Update User Profile (backend)
+### 4.2.4 Update User Profile (backend) (to be removed if proposal 2.B goes through)
 Endpoint: `PUT /api/user/update/backend/{user_id}`  
 desc: update backend parameters  
 Request body:
@@ -158,12 +158,7 @@ Request body:
   }
 ```
 
-Response:  
-```json
-  {
-    "community_id": "INT"
-  }
-```
+Response: `200 (ok)`  
 
 ### 4.3.2 Get community  
 Endpoint: `GET /api/community/details/{community_id}`  
@@ -194,7 +189,7 @@ request body:
 
 Response: `200 (ok)`  
 
-### 4.3.4 Update community (backend)  
+### 4.3.4 Update community (backend)  (to be removed if proposal 2.B goes through)
 Endpoint: `PUT /api/community/update/backend/{community_id}`  
 desc: Updates member count of community  
 Request body:  
@@ -266,7 +261,7 @@ Request:
     "main_text": "string",
   }
 ```
-### 4.4.4 Update Post (backend)
+### 4.4.4 Update Post (backend) (to be removed if proposal 2.B goes through)
 Endpoint: `PUT /api/post/update/backend/{post_id}`  
 desc: Update backend post descriptors  
 Request body:
@@ -390,6 +385,5 @@ Responsible editor @ Responsible team
 ```
 
 # 6. Closing remarks  
-Due to the extensive nature of the API, DB- and BE team should be cooperating on making it a reality  
-
+This draft is due if proposal 2.B goes through on 20/03/2025. All endpoints related to updates are to change, and loose their "user" or "detail" page.
 
