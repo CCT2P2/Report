@@ -1,10 +1,10 @@
 Column Name,Type,Constraints,Description
-ID,INT,PRIMARY KEY,Unique Identifier
+ID,UUID,PRIMARY KEY,Unique Identifier
 EMAIL,TEXT,UNIQUE. NOT NULL, User's Email
 USERNAME,TEXT,UNIQUE. NOT NULL. CHECK (LENGTH(USERNAME) < 100),Unique Username
 PASSWORD,TEXT,NOT NULL. CHECK (LENGTH(PASSWORD) < 1000),Hashed Password (sha256)
 IMG_PATH,TEXT,,URL TO PP
-POST_IDs,INT[],,Array of post IDs (FK to posts.id)
-COMMUNITY_IDs,INT[],,Array of communities (FK to communities.id)
+POST_IDs,UUID[],,Array of post IDs (FK to posts.id)
+COMMUNITY_IDs,UUID[],,Array of communities (FK to communities.id)
 ADMIN,BOOL,NOT NULL. DEFAULT FALSE,ADMIN FLAG
-TAGS,INT[],,Array of tags for content recommendation
+TAGS,UUID[],,Array of tags for content recommendation
