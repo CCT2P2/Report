@@ -381,7 +381,7 @@ Response:
 
 ## 4.7 Feedback
 ### 4.7.1 Create feedback
-Endpoint: `PUT /api/feedback`  
+Endpoint: `PUT: /api/feedback/submit`  
 Desc: creates a feedback entrance  
 Request:
 ```json
@@ -391,6 +391,25 @@ Request:
     "feedback": "string?",
     "rating": "int",
     "timestamp": "int"
+  }
+```
+
+### 4.7.2 Retrieve feedback  
+Endpoint: `GET: /api/feedback/all`  
+Desc: Retrieve all feedback  
+notes: may not be used  
+Response:
+```json
+  {
+    "results": [
+      {
+        "worked": "string",
+        "didnt": "string",
+        "feedback": "string?",
+        "rating": "int",
+        "timestamp": "int"
+      }
+    ]
   }
 ```
 
