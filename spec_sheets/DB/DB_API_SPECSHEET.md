@@ -56,6 +56,19 @@ Dedicated com-port for API: 5047
   COMMENT_CNT    INT         NOT NULL. DEFAULT 0                Comment count
   Comments       INT\[\]                                        Array of post id\'s for comments (FK. Post.ID)
   ```
+
+## 3.4 Feedback
+  ```
+  Column name   Type     Constraints                  Description
+  ------------- -------- ---------------------------- -------------------------------------------
+  id            INT      PRIMARY KEY AUTO_INCREMENT   Unique identifier for each feedback entry
+  worked        STRING   NOT NULL                     what worked
+  didnt         STRING   NOT NULL                     what didnt work
+  feedback      STRING                                additional feedback
+  rating        INT      NOT NULL                     rating from 1 to 5
+  timestamp     INT      NOT NULL                     timestamp of feedback entry
+```
+
 if POST_ID_REF is set, this indicates repost by default UNLESS COMMENT_FLAG is set too. COMMENT_FLAG cannot be set without POST_ID_REF  
 
 # 4. API Endpoints  
@@ -363,6 +376,21 @@ Response:
         "IMG_PATH": "string"
       }
     ]
+  }
+```
+
+## 4.7
+### 4.7.1 Feedback
+Endpoint: `PUT /api/feedback`  
+Desc: creates a feedback entrance  
+Request:
+```json
+  {
+    "worked": "string",
+    "didnt": "string",
+    "feedback": "string?",
+    "rating": "int",
+    "timestamp": "int"
   }
 ```
 
