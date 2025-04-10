@@ -1,0 +1,7 @@
+Column name,Type,Constraints,Description
+id,INT,PRIMARY KEY AUTO_INCREMENT,Unique identifier for each feedback entry
+worked, STRING, NOT NULL, what worked
+didnt, STRING, NOT NULL, what didnt work
+feedback, STRING,, additional feedback
+rating, INT, NOT NULL, rating from 1 to 5
+timestamp, INT, NOT NULL, timestamp of feedback entry
