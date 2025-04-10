@@ -26,17 +26,20 @@ Dedicated com-port for API: 5047
 
 ## 3.2 User  
   ```
-  Column Name     Type      Constraints                                         Description
-  --------------- --------- --------------------------------------------------- ---------------------------------------------
-  ID              INT       PRIMARY KEY                                         Unique Identifier
-  EMAIL           TEXT      UNIQUE. NOT NULL                                    User\'s Email
-  USERNAME        TEXT      UNIQUE. NOT NULL. CHECK (LENGTH(USERNAME) \< 100)   Unique Username
-  PASSWORD        TEXT      NOT NULL. CHECK (LENGTH(PASSWORD) \< 1000)          Hashed Password (sha256)
-  IMG_PATH        TEXT                                                          URL TO PP
-  POST_IDs        INT\[\]                                                       Array of post IDs (FK to posts.id)
-  COMMUNITY_IDs   INT\[\]                                                       Array of communities (FK to communities.id)
-  ADMIN           BOOL      NOT NULL. DEFAULT FALSE                             ADMIN FLAG
-  TAGS            INT\[\]                                                       Array of tags for content recommendation
+  Column Name     Type       Constraints                                         Description
+  --------------- ---------- --------------------------------------------------- ---------------------------------------------
+  ID              UUID       PRIMARY KEY                                         Unique Identifier
+  EMAIL           TEXT       UNIQUE. NOT NULL                                    User\'s Email
+  USERNAME        TEXT       UNIQUE. NOT NULL. CHECK (LENGTH(USERNAME) \< 100)   Unique Username
+  PASSWORD        TEXT       NOT NULL. CHECK (LENGTH(PASSWORD) \< 1000)          Hashed Password (sha256)
+  IMG_PATH        TEXT                                                           URL TO PP
+  POST_IDs        UUID\[\]                                                       Array of post IDs (FK to posts.id)
+  LIKE_IDs        UUID\[\]                                                       Array of post IDs (FK to posts.id)
+  DISLIKE_IDs     UUID\[\]                                                       Array of post IDs (FK to posts.id)
+  COMMENT_IDs     UUID\[\]                                                       Array of post IDs (FK to posts.id)
+  COMMUNITY_IDs   UUID\[\]                                                       Array of communities (FK to communities.id)
+  ADMIN           BOOL       NOT NULL. DEFAULT FALSE                             ADMIN FLAG
+  TAGS            UUID\[\]                                                       Array of tags for content recommendation
   ```
 
 ## 3.3 Posts  
@@ -114,16 +117,20 @@ Endpoint: `GET /api/user/profile/{user_id}`
 Desc: Retrieve user data  
 Response:  
 ```json
-  {
-    "id": "INT",
-    "email": "string",
-    "username": "string",
-    "img_path": "string",
-    "post_ids": ["INT"],
-    "community_ids": ["INT"],
-    "tags": ["INT"],
-    "admin": "boolean"
-  }
+{
+  "id": "UUID",
+  "email": "string",
+  "username": "string",
+  "img_path": "string",
+  "post_ids": ["UUID"],
+  "like_ids": ["UUID"],
+  "dislike_ids": ["UUID"],
+  "comment_ids": ["UUID"],
+  "community_ids": ["UUID"],
+  "tags": ["UUID"],
+  "admin": "boolean"
+}
+
 ```
 ### 4.2.2 Delete User Account  
 Endpoint: `DELETE /api/user/remove/{user_id}`  
@@ -147,11 +154,16 @@ Endpoint: `PUT /api/user/update/backend/{user_id}`
 desc: update backend parameters  
 Request body:
 ```json
-  {
-    "communities" : [INT],
-    "POST_IDs" : [INT],
-    "TAGS" : [INT]
-  }
+{
+  "post_ids": ["UUID"],
+  "like_ids": ["UUID"],
+  "dislike_ids": ["UUID"],
+  "comment_ids": ["UUID"],
+  "community_ids": ["UUID"],
+  "tags": ["UUID"],
+  "admin": "boolean"
+}
+
 ```
 
 Response: `200 (OK)`
