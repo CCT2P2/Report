@@ -379,8 +379,8 @@ Response:
   }
 ```
 
-## 4.7
-### 4.7.1 Feedback
+## 4.7 Feedback
+### 4.7.1 Create feedback
 Endpoint: `PUT /api/feedback`  
 Desc: creates a feedback entrance  
 Request:
