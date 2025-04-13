@@ -1,17 +1,17 @@
-# 1. DB API specsheet   
-Time: 27-03-2025 @ 14:53   
-Author: Sebastian Lindau-Skands   
-Reciever: GNUF    
-Version: 1.6  
+# 1. DB API specsheet
+Time: 27-03-2025 @ 14:53
+Author: Sebastian Lindau-Skands
+Reciever: GNUF
+Version: 1.6
 
-# 2. Overview  
-DB: sqlite  
-API: C# (IMC for frequent values)  
-Env: alpine/sqlite:3.48.0  
+# 2. Overview
+DB: sqlite
+API: C# (IMC for frequent values)
+Env: alpine/sqlite:3.48.0
 Dedicated com-port for API: 5047
 
-# 3. Database Schema  
-  ## 3.1 Community  
+# 3. Database Schema
+  ## 3.1 Community
   ```
   Column name    Type      Constraints                                     Description
   -------------- --------- ----------------------------------------------- --------------------------------------
@@ -24,14 +24,15 @@ Dedicated com-port for API: 5047
   POST_IDs       INT\[\]                                                   Array of post ID\'s (FK to posts.id)
   ```
 
-## 3.2 User  
+## 3.2 User
   ```
   Column Name     Type       Constraints                                         Description
   --------------- ---------- --------------------------------------------------- ---------------------------------------------
   ID              UUID       PRIMARY KEY                                         Unique Identifier
   EMAIL           TEXT       UNIQUE. NOT NULL                                    User\'s Email
   USERNAME        TEXT       UNIQUE. NOT NULL. CHECK (LENGTH(USERNAME) \< 100)   Unique Username
-  PASSWORD        TEXT       NOT NULL. CHECK (LENGTH(PASSWORD) \< 1000)          Hashed Password (sha256)
+  PASSWORD        TEXT       NOT NULL. CHECK (LENGTH(PASSWORD) \< 1000)          Hashed password (argon2)
+  SALT            TEXT       NOT NULL                                            Hashing salt (argon2)
   IMG_PATH        TEXT                                                           URL TO PP
   POST_IDs        UUID\[\]                                                       Array of post IDs (FK to posts.id)
   LIKE_IDs        UUID\[\]                                                       Array of post IDs (FK to posts.id)
@@ -42,7 +43,7 @@ Dedicated com-port for API: 5047
   TAGS            UUID\[\]                                                       Array of tags for content recommendation
   ```
 
-## 3.3 Posts  
+## 3.3 Posts
   ```
   Column Name    Type        Constraints                        Description
   -------------- ----------- ---------------------------------- ---------------------------------------------------------
@@ -72,32 +73,32 @@ Dedicated com-port for API: 5047
   timestamp     INT      NOT NULL                     timestamp of feedback entry
 ```
 
-if POST_ID_REF is set, this indicates repost by default UNLESS COMMENT_FLAG is set too. COMMENT_FLAG cannot be set without POST_ID_REF  
+if POST_ID_REF is set, this indicates repost by default UNLESS COMMENT_FLAG is set too. COMMENT_FLAG cannot be set without POST_ID_REF
 
-# 4. API Endpoints  
-## 4.1 Authentication  
-### 4.1.1 User Login  
-Endpoint: `POST /api/auth/login`  
-Desc: Auth user and return access token  
-Request body:  
+# 4. API Endpoints
+## 4.1 Authentication
+### 4.1.1 User Login
+Endpoint: `POST /api/auth/login`
+Desc: Auth user and return access token
+Request body:
   ```json
     {
       "username": "string",
       "password": "string"
     }
   ```
-Response:  
+Response:
   ```json
     {
       "user_id": "INT"
     }
   ```
-if user not found, refer to "5.1 HTTP codes"  
+if user not found, refer to "5.1 HTTP codes"
 
-### 4.1.2 User Registration  
-Endpoint: `POST /api/auth/register`  
-Desc. Register a new user, and return access token  
-Request body:  
+### 4.1.2 User Registration
+Endpoint: `POST /api/auth/register`
+Desc. Register a new user, and return access token
+Request body:
   ```json
     {
       "email": "string",
@@ -105,17 +106,17 @@ Request body:
       "password": "string"
     }
   ```
-Response:  
+Response:
   ```json
     {
       "user_id": "INT"
     }
   ```
-## 4.2 User Management  
-### 4.2.1 Get User Profile  
-Endpoint: `GET /api/user/profile/{user_id}`  
-Desc: Retrieve user data  
-Response:  
+## 4.2 User Management
+### 4.2.1 Get User Profile
+Endpoint: `GET /api/user/profile/{user_id}`
+Desc: Retrieve user data
+Response:
 ```json
 {
   "id": "UUID",
@@ -132,26 +133,26 @@ Response:
 }
 
 ```
-### 4.2.2 Delete User Account  
-Endpoint: `DELETE /api/user/remove/{user_id}`  
-desc: Deletes the account  
-Response: `200 (ok)`  
+### 4.2.2 Delete User Account
+Endpoint: `DELETE /api/user/remove/{user_id}`
+desc: Deletes the account
+Response: `200 (ok)`
 
 ### 4.2.3 Update User Profile  (user)
-Endpoint: `PUT /api/user/update/user/{user_id}`    
-desc: Updates user profile  
-Request body:  
+Endpoint: `PUT /api/user/update/user/{user_id}`
+desc: Updates user profile
+Request body:
 ```json
   {
     "img_path": "string",
     "password": "string",
   }
 ```
-Response: `200 (OK)`  
+Response: `200 (OK)`
 
 ### 4.2.4 Update User Profile (backend)
-Endpoint: `PUT /api/user/update/backend/{user_id}`  
-desc: update backend parameters  
+Endpoint: `PUT /api/user/update/backend/{user_id}`
+desc: update backend parameters
 Request body:
 ```json
 {
@@ -168,11 +169,11 @@ Request body:
 
 Response: `200 (OK)`
 
-## 4.3 Community management  
-### 4.3.1 Create community  
-Endpoint: `POST /api/community/create`<br>  
-desc: Creates a community<br>  
-Request body:  
+## 4.3 Community management
+### 4.3.1 Create community
+Endpoint: `POST /api/community/create`<br>
+desc: Creates a community<br>
+Request body:
 ```json
   {
     "name": "string",
@@ -182,17 +183,17 @@ Request body:
   }
 ```
 
-Response:  
+Response:
 ```json
   {
     "community_id": "INT"
   }
 ```
 
-### 4.3.2 Get community  
-Endpoint: `GET /api/community/details/{community_id}`  
-desc: Fetches details of community  
-Response:  
+### 4.3.2 Get community
+Endpoint: `GET /api/community/details/{community_id}`
+desc: Fetches details of community
+Response:
 ```json
   {
     "id": "INT",
@@ -205,10 +206,10 @@ Response:
   }
 ```
 
-### 4.3.3 Update community (user) 
-Endpoint: `PUT /api/community/update/details/{community_id}`  
-desc: updates details and image of community (not membercount)  
-request body:  
+### 4.3.3 Update community (user)
+Endpoint: `PUT /api/community/update/details/{community_id}`
+desc: updates details and image of community (not membercount)
+request body:
 ```json
   {
     "description": "string",
@@ -216,12 +217,12 @@ request body:
   }
 ```
 
-Response: `200 (ok)`  
+Response: `200 (ok)`
 
-### 4.3.4 Update community (backend)  
-Endpoint: `PUT /api/community/update/backend/{community_id}`  
-desc: Updates member count of community  
-Request body:  
+### 4.3.4 Update community (backend)
+Endpoint: `PUT /api/community/update/backend/{community_id}`
+desc: Updates member count of community
+Request body:
 ```json
   {
     "member_count": "int",
@@ -230,18 +231,18 @@ Request body:
   }
 ```
 
-Response: `200 (ok)`  
+Response: `200 (ok)`
 
-### 4.3.5 Delete community  
-Endpoint: `DELETE /api/community/remove/{community_id}`  
-desc: deletes the community  
-Response: `200 (ok)`  
+### 4.3.5 Delete community
+Endpoint: `DELETE /api/community/remove/{community_id}`
+desc: deletes the community
+Response: `200 (ok)`
 
-## 4.4 Post management  
-### 4.4.1 Create post  
-Endpoint: `POST /api/post/create`  
-desc: Create a new post  
-Request body:  
+## 4.4 Post management
+### 4.4.1 Create post
+Endpoint: `POST /api/post/create`
+desc: Create a new post
+Request body:
 ```json
   {
     "title": "string",
@@ -252,17 +253,17 @@ Request body:
     "comment_flag": "boolean"
   }
 ```
-Response:  
+Response:
 ```json
   {
     "post_id": "INT"
   }
 ```
 
-### 4.4.2 Get post  
-Endpoint: `GET /api/post/view/{post_id}`  
-desc: fetch all details about post  
-Response:  
+### 4.4.2 Get post
+Endpoint: `GET /api/post/view/{post_id}`
+desc: fetch all details about post
+Response:
 ```json
   {
     "id": "INT",
@@ -280,10 +281,10 @@ Response:
   }
 ```
 
-### 4.4.3 Update post (user) 
-Endpoint: `PUT /api/post/update/user/{post_id}`  
-desc: Edits post  
-Request:  
+### 4.4.3 Update post (user)
+Endpoint: `PUT /api/post/update/user/{post_id}`
+desc: Edits post
+Request:
 ```json
   {
     "title": "string",
@@ -291,8 +292,8 @@ Request:
   }
 ```
 ### 4.4.4 Update Post (backend)
-Endpoint: `PUT /api/post/update/backend/{post_id}`  
-desc: Update backend post descriptors  
+Endpoint: `PUT /api/post/update/backend/{post_id}`
+desc: Update backend post descriptors
 Request body:
 ```json
   {
@@ -303,46 +304,46 @@ Request body:
   }
 ```
 
-Response: `200 (ok)`  
+Response: `200 (ok)`
 
-### 4.4.5 Delete post  
-Endpoint: `DELETE /api/post/remove/{post_id}`  
-Desc: Deletes post  
-Response: `200 (ok)`  
+### 4.4.5 Delete post
+Endpoint: `DELETE /api/post/remove/{post_id}`
+Desc: Deletes post
+Response: `200 (ok)`
 
-## 4.5 Interactions  
-### 4.5.1 Like / Dislike  
-Endpoint `PUT /api/post/vote/{post_id}`  
-Desc: allows backend to modify like/dislike  
-Request body:  
+## 4.5 Interactions
+### 4.5.1 Like / Dislike
+Endpoint `PUT /api/post/vote/{post_id}`
+Desc: allows backend to modify like/dislike
+Request body:
 ```json
   {
     "likes": "int",
     "dislikes": "int"
   }
 ```
-deletion of like and dislike will be handled via same endpoint  
+deletion of like and dislike will be handled via same endpoint
 
-Response: `200 (ok)`  
+Response: `200 (ok)`
 
-### 4.5.2 Comments  
-Endpoint `PUT /api/post/comments/{post_id}`  
-Desc: Adds ref to comment post to origin post  
-Request body:  
+### 4.5.2 Comments
+Endpoint `PUT /api/post/comments/{post_id}`
+Desc: Adds ref to comment post to origin post
+Request body:
 ```json
   {
     "Comments": "INT[]"
   }
 ```
-Response: `200 (ok)`  
+Response: `200 (ok)`
 
-## 4.6 Search  
-Search flags and filters are handled backend  
-### 4.6.1 Search Posts  
-Endpoint: `GET /api/search/posts`  
-Desc: searches accross all posts  
-Query parameter: `?q={keywords}`  
-Response:  
+## 4.6 Search
+Search flags and filters are handled backend
+### 4.6.1 Search Posts
+Endpoint: `GET /api/search/posts`
+Desc: searches accross all posts
+Query parameter: `?q={keywords}`
+Response:
 ```json
   {
     "results": [
@@ -356,11 +357,11 @@ Response:
   }
 ```
 
-### 4.6.2 Search Communities  
-Endpoint: `GET /api/search/communities`  
-Desc: searches accross all communities  
-Query parameter: `q?={keywords}`  
-Response:  
+### 4.6.2 Search Communities
+Endpoint: `GET /api/search/communities`
+Desc: searches accross all communities
+Query parameter: `q?={keywords}`
+Response:
 ```json
   {
     "results": [
@@ -374,11 +375,11 @@ Response:
   }
 ```
 
-### 4.6.3 Search user  
-Endpoint: `GET /api/search/users`  
-Desc: Searches across all users  
-Query parameter: `q?={keywords}`  
-Response:  
+### 4.6.3 Search user
+Endpoint: `GET /api/search/users`
+Desc: Searches across all users
+Query parameter: `q?={keywords}`
+Response:
 ```json
   {
     "results": [
@@ -393,8 +394,8 @@ Response:
 
 ## 4.7 Feedback
 ### 4.7.1 Create feedback
-Endpoint: `PUT: /api/feedback/submit`  
-Desc: creates a feedback entrance  
+Endpoint: `PUT: /api/feedback/submit`
+Desc: creates a feedback entrance
 Request:
 ```json
   {
@@ -406,10 +407,10 @@ Request:
   }
 ```
 
-### 4.7.2 Retrieve feedback  
-Endpoint: `GET: /api/feedback/all`  
-Desc: Retrieve all feedback  
-notes: may not be used  
+### 4.7.2 Retrieve feedback
+Endpoint: `GET: /api/feedback/all`
+Desc: Retrieve all feedback
+notes: may not be used
 Response:
 ```json
   {
@@ -425,20 +426,20 @@ Response:
   }
 ```
 
-# 5. Error handling  
-## 5.1 HTTP codes used  
-- 200 (ok) | generic response when no response body is required  
-- 204 (no content) | use when data entry is empty (so does exist, but only contains NULL)  
-- 400 (bad request) | use when request body is malformed  
-- 401 (unauthorised) | use when user is a) not found, or b) does not have privilege to perform action  
-- 404 (not found) | use when data entry not found  
-- 500 (internal server error) | use for all other exceptions  
+# 5. Error handling
+## 5.1 HTTP codes used
+- 200 (ok) | generic response when no response body is required
+- 204 (no content) | use when data entry is empty (so does exist, but only contains NULL)
+- 400 (bad request) | use when request body is malformed
+- 401 (unauthorised) | use when user is a) not found, or b) does not have privilege to perform action
+- 404 (not found) | use when data entry not found
+- 500 (internal server error) | use for all other exceptions
 
-## 5.2 Security  
-- Tokens are generated backend, and stored temporarilæy till their expiration time (3600). Tokens are linked to user id's (stored locally in browser cookie) to validate session  
+## 5.2 Security
+- Tokens are generated backend, and stored temporarilæy till their expiration time (3600). Tokens are linked to user id's (stored locally in browser cookie) to validate session
 
-## 5.3 Versioning  
-Versioning will be done via headers in suggested formmat  
+## 5.3 Versioning
+Versioning will be done via headers in suggested formmat
 ```
 Description
 Date of last edit @ time of last edit
@@ -447,7 +448,5 @@ project name @ current version [stable / not stable / not tested]
 Responsible editor @ Responsible team
 ```
 
-# 6. Closing remarks  
-Due to the extensive nature of the API, DB- and BE team should be cooperating on making it a reality  
-
-
+# 6. Closing remarks
+Due to the extensive nature of the API, DB- and BE team should be cooperating on making it a reality

@@ -2,7 +2,8 @@ Column Name,Type,Constraints,Description
 ID,UUID,PRIMARY KEY,Unique Identifier
 EMAIL,TEXT,UNIQUE. NOT NULL, User's Email
 USERNAME,TEXT,UNIQUE. NOT NULL. CHECK (LENGTH(USERNAME) < 100),Unique Username
-PASSWORD,TEXT,NOT NULL. CHECK (LENGTH(PASSWORD) < 1000),Hashed Password (sha256)
+PASSWORD,TEXT,NOT NULL. CHECK (LENGTH(PASSWORD) < 1000), Hashed password (argon2)
+SALT, TEXT, NOT NULL, Hashing salt (argon2)
 IMG_PATH,TEXT,,URL TO PP
 POST_IDs,UUID[],,Array of post IDs (FK to posts.id)
 LIKE_IDs,UUID[],,Array of post IDs (FK to posts.id)
