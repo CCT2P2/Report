@@ -367,27 +367,37 @@ Examples for using it:
 
 
 ## 4.5 Interactions
+## 4.5 Interactions
 ### 4.5.1 Like / Dislike
 Endpoint `PUT /api/post/vote/{post_id}`
-Desc: allows backend to modify like/dislike
 Request body:
 ```json
   {
-    "likes": "int",
-    "dislikes": "int"
+    "user_id": "INT",
+    "vote_type": "string"  // "like", "dislike", or "none" ("none" removes the vote for the user)
   }
 ```
-deletion of like and dislike will be handled via same endpoint
-
 Response: `200 (ok)`
 
-### 4.5.2 Comments
-Endpoint `PUT /api/post/comments/{post_id}`
-Desc: Adds ref to comment post to origin post
+### 4.5.2 Get User Vote Status
+Endpoint: `GET /api/post/{post_id}/vote/{user_id}`
+Description: Check if a user has liked/disliked a post
+Response:
+```json
+  {
+    "vote_type": "string"  // "like", "dislike", or "none"
+  }
+```
+
+### 4.5.3 Create Comment
+Note: teknisk set kan vi godt bare bruge 4.4.1 Create Post her,  men lige nu kan den ikke finde ud af at tilføje kommentarer til deres parent post. tror det ville være bedre at have seperate endpoints anyway så de er mindre bloatede, da der er en del forskellige mellem dem
+Endpoint `POST /api/post/comments/{post_id}`
+Desc:  Create a comment on a post
 Request body:
 ```json
   {
-    "Comments": "INT[]"
+    "user_id": "INT",
+    "text": "string"
   }
 ```
 Response: `200 (ok)`
