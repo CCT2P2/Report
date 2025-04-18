@@ -35,9 +35,9 @@ Dedicated com-port for API: 5047
   SALT            TEXT       NOT NULL                                            Hashing salt (argon2)
   IMG_PATH        TEXT                                                           URL TO PP
   POST_IDs        UUID\[\]                                                       Array of post IDs (FK to posts.id)
-  LIKE_IDs        UUID\[\]                                                       Array of post IDs (FK to posts.id)
-  DISLIKE_IDs     UUID\[\]                                                       Array of post IDs (FK to posts.id)
-  COMMENT_IDs     UUID\[\]                                                       Array of post IDs (FK to posts.id)
+  LIKE_ID         UUID\[\]                                                       Array of post IDs (FK to posts.id)
+  DISLIKE_ID      UUID\[\]                                                       Array of post IDs (FK to posts.id)
+  COMMENT_ID      UUID\[\]                                                       Array of post IDs (FK to posts.id)
   COMMUNITY_IDs   UUID\[\]                                                       Array of communities (FK to communities.id)
   ADMIN           BOOL       NOT NULL. DEFAULT FALSE                             ADMIN FLAG
   TAGS            UUID\[\]                                                       Array of tags for content recommendation
