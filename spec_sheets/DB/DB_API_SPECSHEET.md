@@ -242,6 +242,17 @@ Endpoint: `DELETE /api/community/remove/{community_id}`
 desc: deletes the community
 Response: `200 (ok)`
 
+### 4.3.6 Get All Communities
+Endpoint: `GET /api/community/all`  
+desc: fetches ID and name of all communities  
+response:
+```json
+  {
+    "id": ["int"],
+    "name": ["string"]
+  }
+```
+
 ## 4.4 Post management
 ### 4.4.1 Create post
 Endpoint: `POST /api/post/create`
