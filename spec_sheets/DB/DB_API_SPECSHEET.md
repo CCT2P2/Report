@@ -216,6 +216,7 @@ desc: updates details and image of community (not membercount)
 request body:
 ```json
   {
+    "name": "string",
     "description": "string",
     "img_path": "string"
   }
@@ -250,6 +251,7 @@ response:
   {
     "id": ["int"],
     "name": ["string"]
+    "description": ["string"]
   }
 ```
 
