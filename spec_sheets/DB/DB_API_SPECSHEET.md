@@ -378,6 +378,37 @@ Examples for using it:
 - User profile posts: `/api/posts?user_id=45`
 - Recent popular posts: `/api/posts?sort_by=likes&timestamp_start=1714503600`
 
+### 4.4.7 Get Multible posts by id
+Endpoint: `GET /api/post/postsids` 
+Desc: Fetch multiple posts based on various filter parameters  
+
+Query parameters:
+```
+ids:   string               // filter by a csv string of post_ids
+```
+
+Response:
+```json
+{
+  "posts": [
+    {
+      "post_id": "INT",
+      "title": "string",
+      "main_text": "string",
+      "auth_id": "INT",
+      "com_id": "INT",
+      "timestamp": "INT",
+      "likes": "INT",
+      "dislikes": "INT",
+      "post_id_ref": "INT",
+      "comment_flag": "boolean",
+      "comment_count": "INT"
+    }
+    ]
+}
+```
+Examples for using it:
+- Get posts by the id 1,2,3 and 4: `/api/post/postsids?ids=1,2,3,4`
 
 ## 4.5 Interactions
 ## 4.5 Interactions
