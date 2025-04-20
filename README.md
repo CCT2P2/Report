@@ -5,7 +5,7 @@ Indsamling og analyse af cancer patienters livstilsforhold, samt genetiske forho
 - Social medie
 - målgruppen: computer enthusiaster
 - alder: 16+
-- frontend: react, tailwind, vite, zustand, zod
+- frontend: react, tailwindcss, next.js, zustand, zod, auth.js, shadcn
 - backend; sqllite (db), c#
 - reddit like forum (GNUF)
 - annonymitet videst muligt, dog stadig med login or bruger profiler

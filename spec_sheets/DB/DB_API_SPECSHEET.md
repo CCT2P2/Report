@@ -79,7 +79,7 @@ if POST_ID_REF is set, this indicates repost by default UNLESS COMMENT_FLAG is s
 ## 4.1 Authentication
 ### 4.1.1 User Login
 Endpoint: `POST /api/auth/login`
-Desc: Auth user and return access token
+Desc: Auth user and return access token (image_path can be undefined)
 Request body:
   ```json
     {
@@ -90,7 +90,11 @@ Request body:
 Response:
   ```json
     {
-      "user_id": "INT"
+      "user_id": "INT",
+      "username: "string",
+      "email": "string",
+      "image_path": "string",
+      "token": "string"
     }
   ```
 if user not found, refer to "5.1 HTTP codes"
@@ -115,7 +119,7 @@ Response:
 ## 4.2 User Management
 ### 4.2.1 Get User Profile
 Endpoint: `GET /api/user/profile/{user_id}`
-Desc: Retrieve user data
+Desc: Retrieve user data. `img_path`, `post_ids`, `community_ids`, `display_name` and `description` are optional  
 Response:
 ```json
 {
@@ -212,6 +216,7 @@ desc: updates details and image of community (not membercount)
 request body:
 ```json
   {
+    "name": "string",
     "description": "string",
     "img_path": "string"
   }
@@ -237,6 +242,18 @@ Response: `200 (ok)`
 Endpoint: `DELETE /api/community/remove/{community_id}`
 desc: deletes the community
 Response: `200 (ok)`
+
+### 4.3.6 Get All Communities
+Endpoint: `GET /api/community/all`  
+desc: fetches ID and name of all communities  
+response:
+```json
+  {
+    "id": ["int"],
+    "name": ["string"]
+    "description": ["string"]
+  }
+```
 
 ## 4.4 Post management
 ### 4.4.1 Create post
@@ -311,28 +328,120 @@ Endpoint: `DELETE /api/post/remove/{post_id}`
 Desc: Deletes post
 Response: `200 (ok)`
 
+### 4.4.6 Get Multiple Posts
+Endpoint: `GET /api/posts` 
+Desc: Fetch multiple posts based on various filter parameters  
+
+Query parameters:
+```
+community_id: INT                 // Filter by community
+user_id: INT                      // Filter by author
+timestamp_start: INT              // Filter by post time (start)
+timestamp_end: INT                // Filter by post time (end)
+limit: INT                        // Max number of posts to return (default: 20, max: 100)
+offset: INT                       // Pagination offset (default: 0)
+sort_by: string                   // Options: "timestamp", "likes", "comments" (default: "timestamp")
+sort_order: string                // Options: "asc", "desc" (default: "desc")
+tags: [INT]                       // Filter by specific tags (optional)
+```
+
+Response:
+```json
+{
+  "posts": [
+    {
+      "post_id": "INT",
+      "title": "string",
+      "main_text": "string",
+      "auth_id": "INT",
+      "com_id": "INT",
+      "timestamp": "INT",
+      "likes": "INT",
+      "dislikes": "INT",
+      "post_id_ref": "INT",
+      "comment_flag": "boolean",
+      "comment_count": "INT"
+    }
+  ],
+  "total_count": "INT",
+  "next_offset": "INT"
+}
+```
+
+Notes:
+- All query parameters are optional
+- The response includes a `total_count` field indicating the total number of posts matching the filters
+- The response includes a `next_offset` field for scrolling/pagination (null if no more results)
+
+Examples for using it:
+- Get top posts from community: `/api/posts?community_id=123&sort_by=likes&sort_order=desc`
+- User profile posts: `/api/posts?user_id=45`
+- Recent popular posts: `/api/posts?sort_by=likes&timestamp_start=1714503600`
+
+### 4.4.7 Get Multible posts by id
+Endpoint: `GET /api/post/postsids` 
+Desc: Fetch multiple posts based on various filter parameters  
+
+Query parameters:
+```
+ids:   string               // filter by a csv string of post_ids
+```
+
+Response:
+```json
+{
+  "posts": [
+    {
+      "post_id": "INT",
+      "title": "string",
+      "main_text": "string",
+      "auth_id": "INT",
+      "com_id": "INT",
+      "timestamp": "INT",
+      "likes": "INT",
+      "dislikes": "INT",
+      "post_id_ref": "INT",
+      "comment_flag": "boolean",
+      "comment_count": "INT"
+    }
+    ]
+}
+```
+Examples for using it:
+- Get posts by the id 1,2,3 and 4: `/api/post/postsids?ids=1,2,3,4`
+
+## 4.5 Interactions
 ## 4.5 Interactions
 ### 4.5.1 Like / Dislike
 Endpoint `PUT /api/post/vote/{post_id}`
-Desc: allows backend to modify like/dislike
 Request body:
 ```json
   {
-    "likes": "int",
-    "dislikes": "int"
+    "user_id": "INT",
+    "vote_type": "string"  // "like", "dislike", or "none" ("none" removes the vote for the user)
   }
 ```
-deletion of like and dislike will be handled via same endpoint
-
 Response: `200 (ok)`
 
-### 4.5.2 Comments
-Endpoint `PUT /api/post/comments/{post_id}`
-Desc: Adds ref to comment post to origin post
+### 4.5.2 Get User Vote Status
+Endpoint: `GET /api/post/{post_id}/vote/{user_id}`
+Description: Check if a user has liked/disliked a post
+Response:
+```json
+  {
+    "vote_type": "string"  // "like", "dislike", or "none"
+  }
+```
+
+### 4.5.3 Create Comment
+Note: teknisk set kan vi godt bare bruge 4.4.1 Create Post her,  men lige nu kan den ikke finde ud af at tilføje kommentarer til deres parent post. tror det ville være bedre at have seperate endpoints anyway så de er mindre bloatede, da der er en del forskellige mellem dem
+Endpoint `POST /api/post/comments/{post_id}`
+Desc:  Create a comment on a post
 Request body:
 ```json
   {
-    "Comments": "INT[]"
+    "user_id": "INT",
+    "text": "string"
   }
 ```
 Response: `200 (ok)`
