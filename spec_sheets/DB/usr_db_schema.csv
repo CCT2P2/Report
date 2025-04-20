@@ -9,6 +9,6 @@ POST_IDs,UUID[],,Array of post IDs (FK to posts.id)
 LIKE_IDs,UUID[],,Array of post IDs (FK to posts.id)
 DISLIKE_IDs,UUID[],,Array of post IDs (FK to posts.id)
 COMMENT_IDs,UUID[],,Array of post IDs (FK to posts.id)
-COMMUNITY_IDs,UUID[],,Array of communities (FK to communities.id)
+COMMUNITY_IDs,UUID[],,Array of community IDs and names [id. name. id. name.] (FK to communities.id) (FK to communities.name)
 ADMIN,BOOL,NOT NULL. DEFAULT FALSE,ADMIN FLAG
 TAGS,UUID[],,Array of tags for content recommendation

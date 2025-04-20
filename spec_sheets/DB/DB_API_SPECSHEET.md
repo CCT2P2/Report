@@ -27,7 +27,7 @@ Dedicated com-port for API: 5047
 ## 3.2 User
   ```
   Column Name     Type       Constraints                                         Description
-  --------------- ---------- --------------------------------------------------- ---------------------------------------------
+  --------------- ---------- --------------------------------------------------- ----------------------------------------------------------------------------------------------------------
   ID              UUID       PRIMARY KEY                                         Unique Identifier
   EMAIL           TEXT       UNIQUE. NOT NULL                                    User\'s Email
   USERNAME        TEXT       UNIQUE. NOT NULL. CHECK (LENGTH(USERNAME) \< 100)   Unique Username
@@ -38,7 +38,7 @@ Dedicated com-port for API: 5047
   LIKE_IDs        UUID\[\]                                                       Array of post IDs (FK to posts.id)
   DISLIKE_IDs     UUID\[\]                                                       Array of post IDs (FK to posts.id)
   COMMENT_IDs     UUID\[\]                                                       Array of post IDs (FK to posts.id)
-  COMMUNITY_IDs   UUID\[\]                                                       Array of communities (FK to communities.id)
+  COMMUNITY_IDs   UUID\[\]                                                       Array of community IDs and names \[id, name, id, name, ...\] (FK to communities.id) (FK to communities.name)
   ADMIN           BOOL       NOT NULL. DEFAULT FALSE                             ADMIN FLAG
   TAGS            UUID\[\]                                                       Array of tags for content recommendation
   ```
