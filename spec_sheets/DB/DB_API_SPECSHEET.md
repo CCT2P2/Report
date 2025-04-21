@@ -286,15 +286,23 @@ Response:
     "id": "INT",
     "title": "string",
     "main_text": "string",
-    "auth_id": "INT",
-    "com_id": "INT",
     "timestamp": "timestamp",
     "likes": "INT",
     "dislikes": "INT",
     "post_id_ref": "INT",
     "comment_flag": "boolean",
     "comment_count": "INT",
-    "comments": ["INT"]
+    "comments": ["INT"],
+    "author": {
+      "auth_id": "INT",
+      "username": "string",
+      "imagePath": "string",
+      "isAdmin": "INT",
+    }
+    "community = new {
+      "com_id": "INT",
+      "name": "string",
+    }
   }
 ```
 
