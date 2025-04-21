@@ -351,18 +351,18 @@ Desc: Fetch multiple posts based on various filter parameters
 
 Query parameters:
 ```
-community_id: INT                 // Filter by community
-user_id: INT                      // Filter by author
-timestamp_start: INT              // Filter by post time (start)
-timestamp_end: INT                // Filter by post time (end)
+communityId: INT                 // Filter by community
+userId: INT                      // Filter by author
+timestampStart: INT              // Filter by post time (start)
+timestampEnd: INT                // Filter by post time (end)
 limit: INT                        // Max number of posts to return (default: 20, max: 100)
 offset: INT                       // Pagination offset (default: 0)
-sort_by: string                   // Options: "timestamp", "likes", "comments" (default: "timestamp")
-sort_order: string                // Options: "asc", "desc" (default: "desc")
+sortBy: string                   // Options: "timestamp", "likes", "comments" (default: "timestamp")
+sortOrder: string                // Options: "asc", "desc" (default: "desc")
 tags: [INT]                       // Filter by specific tags (optional)
-get_comments: boolean             // If true, get comments (default: false)
-parent_post_id: INT               // If used, only get comments from this parent post. Only does something if get_commets is true.
-get_posts: boolean                // If true, get posts (default: true)
+getComments: boolean             // If true, get comments (default: false)
+parentPostId: INT               // If used, only get comments from this parent post. Only does something if get_commets is true.
+getPosts: boolean                // If true, get posts (default: true)
 ```
 
 Response:
