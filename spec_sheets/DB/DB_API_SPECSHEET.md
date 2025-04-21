@@ -298,8 +298,8 @@ Response:
       "username": "string",
       "imagePath": "string",
       "isAdmin": "INT",
-    }
-    "community = new {
+    },
+    "community: {
       "com_id": "INT",
       "name": "string",
     }
