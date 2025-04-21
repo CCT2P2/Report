@@ -299,7 +299,7 @@ Response:
       "imagePath": "string",
       "isAdmin": "INT",
     },
-    "community: {
+    "community": {
       "com_id": "INT",
       "name": "string",
     }
