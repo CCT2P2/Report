@@ -360,6 +360,9 @@ offset: INT                       // Pagination offset (default: 0)
 sort_by: string                   // Options: "timestamp", "likes", "comments" (default: "timestamp")
 sort_order: string                // Options: "asc", "desc" (default: "desc")
 tags: [INT]                       // Filter by specific tags (optional)
+get_comments: boolean             // If true, get comments (default: false)
+parent_post_id: INT               // If used, only get comments from this parent post. Only does something if get_commets is true.
+get_posts: boolean                // If true, get posts (default: true)
 ```
 
 Response:
