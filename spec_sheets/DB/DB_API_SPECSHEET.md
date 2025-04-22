@@ -225,18 +225,27 @@ request body:
 Response: `200 (ok)`
 
 ### 4.3.4 Update community (backend)
-Endpoint: `PUT /api/community/update/backend/{community_id}`
-desc: Updates member count of community
-Request body:
-```json
-  {
-    "member_count": "int",
-    "TAGS": ["INT"],
-    "POST_IDs": ["INT"]
-  }
+Endpoint: `PUT /api/community/update/backend`
+desc: Updates member count, tags and post_ids of community
+
+Query parameters:
+```
+ member_count: "int" // required
+ TAGS: ["INT"]
+ postID: int
+ 
 ```
 
 Response: `200 (ok)`
+
+Notes:
+- All query parameters ecepe from id are optional
+- postID values will be appended to existing post IDs (if any).
+- tags should be passed as a single string (e.g., "tech,science").
+
+Examples for using it:
+- update POST_IDs: `/api/community/update/backend?id=123&PostID=1234`
+- update member count: `/api/community/update/backend?id=123&member_count=1234568`
 
 ### 4.3.5 Delete community
 Endpoint: `DELETE /api/community/remove/{community_id}`
@@ -286,15 +295,23 @@ Response:
     "id": "INT",
     "title": "string",
     "main_text": "string",
-    "auth_id": "INT",
-    "com_id": "INT",
     "timestamp": "timestamp",
     "likes": "INT",
     "dislikes": "INT",
     "post_id_ref": "INT",
     "comment_flag": "boolean",
     "comment_count": "INT",
-    "comments": ["INT"]
+    "comments": ["INT"],
+    "author": {
+      "auth_id": "INT",
+      "username": "string",
+      "imagePath": "string",
+      "isAdmin": "INT",
+    },
+    "community": {
+      "com_id": "INT",
+      "name": "string",
+    }
   }
 ```
 
@@ -334,15 +351,18 @@ Desc: Fetch multiple posts based on various filter parameters
 
 Query parameters:
 ```
-community_id: INT                 // Filter by community
-user_id: INT                      // Filter by author
-timestamp_start: INT              // Filter by post time (start)
-timestamp_end: INT                // Filter by post time (end)
+communityId: INT                 // Filter by community
+userId: INT                      // Filter by author
+timestampStart: INT              // Filter by post time (start)
+timestampEnd: INT                // Filter by post time (end)
 limit: INT                        // Max number of posts to return (default: 20, max: 100)
 offset: INT                       // Pagination offset (default: 0)
-sort_by: string                   // Options: "timestamp", "likes", "comments" (default: "timestamp")
-sort_order: string                // Options: "asc", "desc" (default: "desc")
+sortBy: string                   // Options: "timestamp", "likes", "comments" (default: "timestamp")
+sortOrder: string                // Options: "asc", "desc" (default: "desc")
 tags: [INT]                       // Filter by specific tags (optional)
+getComments: boolean             // If true, get comments (default: false)
+parentPostId: INT               // If used, only get comments from this parent post. Only does something if get_commets is true.
+getPosts: boolean                // If true, get posts (default: true)
 ```
 
 Response:
