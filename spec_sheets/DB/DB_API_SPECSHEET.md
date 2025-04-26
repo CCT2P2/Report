@@ -119,7 +119,7 @@ Response:
 ## 4.2 User Management
 ### 4.2.1 Get User Profile
 Endpoint: `GET /api/user/profile/{user_id}`
-Desc: Retrieve user data. `img_path`, `post_ids`, `community_ids`, `display_name` and `description` are optional  
+Desc: Retrieve user data. `img_path`, `post_ids`, `community_ids`, `display_name` and `description` are optional
 Response:
 ```json
 {
@@ -233,7 +233,7 @@ Query parameters:
  member_count: "int" // required
  TAGS: ["INT"]
  postID: int
- 
+
 ```
 
 Response: `200 (ok)`
@@ -253,8 +253,8 @@ desc: deletes the community
 Response: `200 (ok)`
 
 ### 4.3.6 Get All Communities
-Endpoint: `GET /api/community/all`  
-desc: fetches ID and name of all communities  
+Endpoint: `GET /api/community/all`
+desc: fetches ID and name of all communities
 response:
 ```json
   {
@@ -346,8 +346,8 @@ Desc: Deletes post
 Response: `200 (ok)`
 
 ### 4.4.6 Get Multiple Posts
-Endpoint: `GET /api/posts` 
-Desc: Fetch multiple posts based on various filter parameters  
+Endpoint: `GET /api/posts`
+Desc: Fetch multiple posts based on various filter parameters
 
 Query parameters:
 ```
@@ -399,8 +399,8 @@ Examples for using it:
 - Recent popular posts: `/api/posts?sort_by=likes&timestamp_start=1714503600`
 
 ### 4.4.7 Get Multible posts by id
-Endpoint: `GET /api/post/postsids` 
-Desc: Fetch multiple posts based on various filter parameters  
+Endpoint: `GET /api/post/postsids`
+Desc: Fetch multiple posts based on various filter parameters
 
 Query parameters:
 ```
@@ -523,7 +523,7 @@ Response:
 
 ## 4.7 Feedback
 ### 4.7.1 Create feedback
-Endpoint: `PUT: /api/feedback/submit`
+Endpoint: `POST: /api/feedback/submit`
 Desc: creates a feedback entrance
 Request:
 ```json
