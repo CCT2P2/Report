@@ -6,3 +6,4 @@ ID, Description, severity, affection, status
 05, about us page can under *very specific* circumstances cause a server side crash, low, server-side, ignored
 06, `esc` does nothing on post creation menu, very low, frontend, ignored
 07, ascii art is broken (due to missing newline), mid, frontend, tbf 1.2
+08, feedback submission with rating 0 results in 400, low, frontend, tbf 1.2
