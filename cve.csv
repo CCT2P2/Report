@@ -5,3 +5,4 @@ ID, Description, severity, affection, status
 04, about us page can occasionally inflict crashes on certain chromium based browsers, low, client-side, ignored
 05, about us page can under *very specific* circumstances cause a server side crash, low, server-side, ignored
 06, `esc` does nothing on post creation menu, very low, frontend, ignored
+07, ascii art is broken (due to missing newline), mid, frontend, tbf 1.2
