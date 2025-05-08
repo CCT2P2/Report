@@ -1,9 +1,20 @@
-ID, Description, severity, affection, status
-01, f12 can allow user to bypass auth check and vote as @any, mid, backend | all users, tbf 1.2
-02, via f12 users can bypass auth check and delete @any, high, backend | all users, tbf 1.2
-03, disabling frosted glass in settings page causes a soft-lock, low, frontend, tbf 1.2
-04, about us page can occasionally inflict crashes on certain chromium based browsers, low, client-side, ignored
-05, about us page can under *very specific* circumstances cause a server side crash, low, server-side, ignored
-06, `esc` does nothing on post creation menu, very low, frontend, ignored
-07, ascii art is broken (due to missing newline), mid, frontend, tbf 1.2
-08, feedback submission with rating 0 results in 400, low, frontend, tbf 1.2
+ID,Title,Description,Severity,Affected Component,Impact Scope,Status
+1,Auth Bypass via DevTools - Voting,Users can bypass authentication checks using browser DevTools (F12) and cast votes as any user.,Medium,Backend,All Users,To Be Fixed in v1.2
+2,Auth Bypass via DevTools - User Deletion,Users can bypass authentication checks using DevTools and delete arbitrary user accounts.,High,Backend,All Users,To Be Fixed in v1.2
+3,Soft Lock on Settings Page,Toggling off frosted glass effects on the settings page causes a UI soft lock.,Low,Frontend,Individual User,To Be Fixed in v1.2
+4,Chromium Crash via About Page,"Under certain conditions, the About Us page may crash Chromium-based browsers.",Low,Client-Side,Individual User,Will Not Fix
+5,Server Crash via About Page,"In very rare cases, specific interaction sequences on the About Us page can crash the server.",Low,Server-Side,All Users,Will Not Fix
+6,ESC Key Nonfunctional on Post Creation,Pressing `Esc` does not close the post creation modal as expected.,Very Low,Frontend,Individual User,Will Not Fix
+7,ASCII Art Display Issue,ASCII art is improperly rendered due to missing newline characters.,Medium,Frontend,All Users,To Be Fixed in v1.2
+8,Feedback Rejection on Zero Rating,Submitting feedback with a rating of 0 results in a 400 Bad Request error.,Low,Frontend,All Users,To Be Fixed in v1.2
+9,Access Token Refresh Loop,"The frontend attempts to refresh access tokens repeatedly without backoff or error resolution, potentially spamming the backend and bloating logs.",Low,Frontend,All Users,To Be Fixed in v1.2
+10,Auth Failure: Invalid Callback URL,"The frontend frequently triggers ""InvalidCallbackUrl"" errors, likely due to misconfigured or mismatched OAuth callback URIs, leading to over 5,000 repeated errors.",Medium,Frontend/Auth,All Users,To Be Fixed in v1.2
+11,HTTPS Redirection Failure,"The backend is unable to determine the HTTPS port for redirect, potentially leading to insecure login flows.",Medium,Backend/Middleware,All Users,To Be Fixed in v1.2
+12,Missing WebRootPath,"Static file serving is broken due to an invalid or missing WebRootPath, impacting delivery of frontend assets.",Low,Backend/Static File Middleware,All Users,To Be Fixed in v1.2
+13,JWT Token Expiration Exceptions,Repeated `SecurityTokenExpiredException` errors suggest either poor refresh handling or excessive reliance on expired tokens.,Medium,Backend/Auth,All Users,To Be Fixed in v1.2
+14,Bad HTTP Request Errors,"Backend receives malformed or unexpected HTTP requests frequently, suggesting either a frontend bug or a lack of input validation.",Medium,Backend/Kestrel,All Users,To Be Fixed in v1.2
+15,Unhandled Kestrel Server Failures,`fail:` logs from Kestrel indicate possible instability or unhandled request exceptions in the hosting layer.,High,Backend/Server,All Users,To Be Fixed in v1.2
+16,Comment Count Not Updating,"After submitting a comment, the comment count on the button does not update until manual refresh, leading to user confusion.",Low,Frontend/Comments,All Users,To Be Fixed in v1.2
+17,Settings Page Soft-Locks Session,"Toggling background opacity causes the settings menu to soft-lock, requiring a full re-login to restore functionality.",Medium,Frontend/Settings,All Users,To Be Fixed in v1.2
+18,Settings Not Persisted Across Sessions,"User settings are not saved or reloaded after session restoration, resetting preferences like background opacity.",Low,Frontend/Settings,All Users,To Be Fixed in v1.2
+19,Logout on Post View Doesn’t Redirect,Logging out while viewing a post does not redirect to the login page; user remains on an inaccessible post page.,Low,Frontend/Auth Routing,All Users,To Be Fixed in v1.2
