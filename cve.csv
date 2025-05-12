@@ -1,9 +1,9 @@
 ID,Fixed,Title,Description,Severity,Affected Component,Impact Scope,Status
 1,Yes,Auth Bypass via DevTools - Voting,Users can bypass authentication checks using browser DevTools (F12) and cast votes as any user.,Medium,Backend,All Users,To Be Fixed in v1.2
 2,Yes,Auth Bypass via DevTools - User Deletion,Users can bypass authentication checks using DevTools and delete arbitrary user accounts.,High,Backend,All Users,To Be Fixed in v1.2
-4,No,Chromium Crash via About Page,"Under certain conditions, the About Us page may crash Chromium-based browsers.",Low,Client-Side,Individual User,Will Not Fix
+4,Addressed,Chromium Crash via About Page,"Under certain conditions, the About Us page may crash Chromium-based browsers.",Low,Client-Side,Individual User,Will Not Fix
 5,No,Server Crash via About Page,"In very rare cases, specific interaction sequences on the About Us page can crash the server.",Low,Server-Side,All Users,Will Not Fix
-6,No,ESC Key Nonfunctional on Post Creation,Pressing `Esc` does not close the post creation modal as expected.,Very Low,Frontend,Individual User,May be fixed in v1.2
+6,Yes,ESC Key Nonfunctional on Post Creation,Pressing `Esc` does not close the post creation modal as expected.,Very Low,Frontend,Individual User,May be fixed in v1.2
 7,Yes,ASCII Art Display Issue,ASCII art is improperly rendered due to missing newline characters.,Medium,Frontend,All Users,To Be Fixed in v1.2
 8,Yes,Feedback Rejection on Zero Rating,Submitting feedback with a rating of 0 results in a 400 Bad Request error.,Low,Frontend,All Users,To Be Fixed in v1.2
 9,No,Access Token Refresh Loop,"The frontend attempts to refresh access tokens repeatedly without backoff or error resolution, potentially spamming the backend and bloating logs.",Low,Frontend,All Users,May be fixed in v1.2
@@ -13,4 +13,4 @@ ID,Fixed,Title,Description,Severity,Affected Component,Impact Scope,Status
 16,No,Comment Count Not Updating,"After submitting a comment, the comment count on the button does not update until manual refresh, leading to user confusion.",Low,Frontend/Comments,All Users,May Be Fixed in v1.2
 17,Yes,Settings Page Soft-Locks Session,"Toggling background opacity causes the settings menu to soft-lock, requiring a full re-login to restore functionality.",Medium,Frontend/Settings,All Users,To Be Fixed in v1.2
 18,Yes,Settings Not Persisted Across Sessions,"User settings are not saved or reloaded after session restoration, resetting preferences like background opacity.",Low,Frontend/Settings,All Users,May be fixed
-19,No,Logout on Post View Doesn’t Redirect,Logging out while viewing a post does not redirect to the login page; user remains on an inaccessible post page.,Low,Frontend/Auth Routing,All Users,To Be Fixed in v1.2
+19,Yes,Logout on Post View Doesn’t Redirect,Logging out while viewing a post does not redirect to the login page; user remains on an inaccessible post page.,Low,Frontend/Auth Routing,All Users,To Be Fixed in v1.2
