@@ -1,16 +1,16 @@
-ID,Title,Description,Severity,Affected Component,Impact Scope,Status
-1,Auth Bypass via DevTools - Voting,Users can bypass authentication checks using browser DevTools (F12) and cast votes as any user.,Medium,Backend,All Users,To Be Fixed in v1.2
-2,Auth Bypass via DevTools - User Deletion,Users can bypass authentication checks using DevTools and delete arbitrary user accounts.,High,Backend,All Users,To Be Fixed in v1.2
-4,Chromium Crash via About Page,"Under certain conditions, the About Us page may crash Chromium-based browsers.",Low,Client-Side,Individual User,Will Not Fix
-5,Server Crash via About Page,"In very rare cases, specific interaction sequences on the About Us page can crash the server.",Low,Server-Side,All Users,Will Not Fix
-6,ESC Key Nonfunctional on Post Creation,Pressing `Esc` does not close the post creation modal as expected.,Very Low,Frontend,Individual User,May be fixed in v1.2
-7,ASCII Art Display Issue,ASCII art is improperly rendered due to missing newline characters.,Medium,Frontend,All Users,To Be Fixed in v1.2
-8,Feedback Rejection on Zero Rating,Submitting feedback with a rating of 0 results in a 400 Bad Request error.,Low,Frontend,All Users,To Be Fixed in v1.2
-9,Access Token Refresh Loop,"The frontend attempts to refresh access tokens repeatedly without backoff or error resolution, potentially spamming the backend and bloating logs.",Low,Frontend,All Users,May be fixed in v1.2
-10,Auth Failure: Invalid Callback URL,"The frontend frequently triggers ""InvalidCallbackUrl"" errors, likely due to misconfigured or mismatched OAuth callback URIs, leading to over 5,000 repeated errors.",Medium,Frontend/Auth,All Users,May be fixed in v1.2
-12,Missing WebRootPath,"Static file serving is broken due to an invalid or missing WebRootPath, impacting delivery of frontend assets.",Low,Backend/Static File Middleware,All Users,May be fixed
-13,JWT Token Expiration Exceptions,Repeated `SecurityTokenExpiredException` errors suggest either poor refresh handling or excessive reliance on expired tokens.,Medium,Backend/Auth,All Users,To Be Fixed in v1.2
-16,Comment Count Not Updating,"After submitting a comment, the comment count on the button does not update until manual refresh, leading to user confusion.",Low,Frontend/Comments,All Users,To Be Fixed in v1.2
-17,Settings Page Soft-Locks Session,"Toggling background opacity causes the settings menu to soft-lock, requiring a full re-login to restore functionality.",Medium,Frontend/Settings,All Users,To Be Fixed in v1.2
-18,Settings Not Persisted Across Sessions,"User settings are not saved or reloaded after session restoration, resetting preferences like background opacity.",Low,Frontend/Settings,All Users,May be fixed
-19,Logout on Post View Doesn’t Redirect,Logging out while viewing a post does not redirect to the login page; user remains on an inaccessible post page.,Low,Frontend/Auth Routing,All Users,To Be Fixed in v1.2
+ID,Fixed,Title,Description,Severity,Affected Component,Impact Scope,Status
+1,Yes,Auth Bypass via DevTools - Voting,Users can bypass authentication checks using browser DevTools (F12) and cast votes as any user.,Medium,Backend,All Users,To Be Fixed in v1.2
+2,Yes,Auth Bypass via DevTools - User Deletion,Users can bypass authentication checks using DevTools and delete arbitrary user accounts.,High,Backend,All Users,To Be Fixed in v1.2
+4,No,Chromium Crash via About Page,"Under certain conditions, the About Us page may crash Chromium-based browsers.",Low,Client-Side,Individual User,Will Not Fix
+5,No,Server Crash via About Page,"In very rare cases, specific interaction sequences on the About Us page can crash the server.",Low,Server-Side,All Users,Will Not Fix
+6,No.ESC Key Nonfunctional on Post Creation,Pressing `Esc` does not close the post creation modal as expected.,Very Low,Frontend,Individual User,May be fixed in v1.2
+7,No,ASCII Art Display Issue,ASCII art is improperly rendered due to missing newline characters.,Medium,Frontend,All Users,To Be Fixed in v1.2
+8,No,Feedback Rejection on Zero Rating,Submitting feedback with a rating of 0 results in a 400 Bad Request error.,Low,Frontend,All Users,To Be Fixed in v1.2
+9,No,Access Token Refresh Loop,"The frontend attempts to refresh access tokens repeatedly without backoff or error resolution, potentially spamming the backend and bloating logs.",Low,Frontend,All Users,May be fixed in v1.2
+10,No,Auth Failure: Invalid Callback URL,"The frontend frequently triggers ""InvalidCallbackUrl"" errors, likely due to misconfigured or mismatched OAuth callback URIs, leading to over 5,000 repeated errors.",Medium,Frontend/Auth,All Users,May be fixed in v1.2
+12,No,Missing WebRootPath,"Static file serving is broken due to an invalid or missing WebRootPath, impacting delivery of frontend assets.",Low,Backend/Static File Middleware,All Users,May be fixed
+13,No,JWT Token Expiration Exceptions,Repeated `SecurityTokenExpiredException` errors suggest either poor refresh handling or excessive reliance on expired tokens.,Medium,Backend/Auth,All Users,To Be Fixed in v1.2
+16,No,Comment Count Not Updating,"After submitting a comment, the comment count on the button does not update until manual refresh, leading to user confusion.",Low,Frontend/Comments,All Users,To Be Fixed in v1.2
+17,Yes,Settings Page Soft-Locks Session,"Toggling background opacity causes the settings menu to soft-lock, requiring a full re-login to restore functionality.",Medium,Frontend/Settings,All Users,To Be Fixed in v1.2
+18,No,Settings Not Persisted Across Sessions,"User settings are not saved or reloaded after session restoration, resetting preferences like background opacity.",Low,Frontend/Settings,All Users,May be fixed
+19,No,Logout on Post View Doesn’t Redirect,Logging out while viewing a post does not redirect to the login page; user remains on an inaccessible post page.,Low,Frontend/Auth Routing,All Users,To Be Fixed in v1.2
