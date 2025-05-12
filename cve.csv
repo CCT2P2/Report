@@ -4,8 +4,8 @@ ID,Fixed,Title,Description,Severity,Affected Component,Impact Scope,Status
 4,No,Chromium Crash via About Page,"Under certain conditions, the About Us page may crash Chromium-based browsers.",Low,Client-Side,Individual User,Will Not Fix
 5,No,Server Crash via About Page,"In very rare cases, specific interaction sequences on the About Us page can crash the server.",Low,Server-Side,All Users,Will Not Fix
 6,No,ESC Key Nonfunctional on Post Creation,Pressing `Esc` does not close the post creation modal as expected.,Very Low,Frontend,Individual User,May be fixed in v1.2
-7,No,ASCII Art Display Issue,ASCII art is improperly rendered due to missing newline characters.,Medium,Frontend,All Users,To Be Fixed in v1.2
-8,No,Feedback Rejection on Zero Rating,Submitting feedback with a rating of 0 results in a 400 Bad Request error.,Low,Frontend,All Users,To Be Fixed in v1.2
+7,Yes,ASCII Art Display Issue,ASCII art is improperly rendered due to missing newline characters.,Medium,Frontend,All Users,To Be Fixed in v1.2
+8,Yes,Feedback Rejection on Zero Rating,Submitting feedback with a rating of 0 results in a 400 Bad Request error.,Low,Frontend,All Users,To Be Fixed in v1.2
 9,No,Access Token Refresh Loop,"The frontend attempts to refresh access tokens repeatedly without backoff or error resolution, potentially spamming the backend and bloating logs.",Low,Frontend,All Users,May be fixed in v1.2
 10,No,Auth Failure: Invalid Callback URL,"The frontend frequently triggers ""InvalidCallbackUrl"" errors, likely due to misconfigured or mismatched OAuth callback URIs, leading to over 5,000 repeated errors.",Medium,Frontend/Auth,All Users,May be fixed in v1.2
 12,No,Missing WebRootPath,"Static file serving is broken due to an invalid or missing WebRootPath, impacting delivery of frontend assets.",Low,Backend/Static File Middleware,All Users,May be fixed
