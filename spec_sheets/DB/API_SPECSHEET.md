@@ -1,64 +1,65 @@
-# 1. DB API specsheet
-Time: 27-03-2025 @ 14:53
-Author: Sebastian Lindau-Skands
-Reciever: GNUF
-Version: 1.6
+# 1. API specsheet
+Time: 21/05/25 @ 13:11 - @Lynet_101
+Author: @Lynet_101 (Sebastian Lindau-Skands)
+Version: 1.7 - Final
 
 # 2. Overview
 DB: sqlite
-API: C# (IMC for frequent values)
-Env: alpine/sqlite:3.48.0
-Dedicated com-port for API: 5047
+API: C#
+env: Bare metal
+Dedicated com-port for API: 5000
 
 # 3. Database Schema
   ## 3.1 Community
   ```
-  Column name    Type      Constraints                                     Description
-  -------------- --------- ----------------------------------------------- --------------------------------------
-  ID             INT       PRIMARY KEY                                     Unique Identifier
-  NAME           TEXT      UNIQUE. NOT NULL. CHECK (LENGTH(NAME) \< 100)   Community Name
-  Description    TEXT      CHECK (LENGTH(description) \< 2000)             Community description
-  IMG_PATH       TEXT                                                      URL to community image
-  MEMBER_COUNT   INT       DEFAULT 0. NOT NULL                             Number of members
-  TAGS           INT\[\]   NOT NULL                                        Content tags
-  POST_IDs       INT\[\]                                                   Array of post ID\'s (FK to posts.id)
+  Column name    Type         Constraints                                     Description                            Note
+  -------------- ------------ ----------------------------------------------- -------------------------------------- --------
+  ID             INT          PRIMARY KEY                                     Unique Identifier
+  NAME           TEXT         UNIQUE. NOT NULL. CHECK (LENGTH(NAME) \< 100)   Community Name
+  Description    TEXT         CHECK (LENGTH(description) \< 500)              Community description
+  IMG_PATH       TEXT                                                         URL to community image                 UNUSED
+  MEMBER_COUNT   INT          DEFAULT 0. NOT NULL                             Number of members
+  TAGS           STR\[CSV\]   NOT NULL                                        Content tags                           UNUSED
+  POST_IDs       STR\[CSV\]                                                   Array of post ID\'s (FK to posts.id)
   ```
 
 ## 3.2 User
   ```
-  Column Name     Type       Constraints                                         Description
-  --------------- ---------- --------------------------------------------------- ----------------------------------------------------------------------------------------------------------
-  ID              UUID       PRIMARY KEY                                         Unique Identifier
-  EMAIL           TEXT       UNIQUE. NOT NULL                                    User\'s Email
-  USERNAME        TEXT       UNIQUE. NOT NULL. CHECK (LENGTH(USERNAME) \< 100)   Unique Username
-  PASSWORD        TEXT       NOT NULL. CHECK (LENGTH(PASSWORD) \< 1000)          Hashed password (argon2)
-  SALT            TEXT       NOT NULL                                            Hashing salt (argon2)
-  IMG_PATH        TEXT                                                           URL TO PP
-  POST_IDs        UUID\[\]                                                       Array of post IDs (FK to posts.id)
-  LIKE_IDs        UUID\[\]                                                       Array of post IDs (FK to posts.id)
-  DISLIKE_IDs     UUID\[\]                                                       Array of post IDs (FK to posts.id)
-  COMMENT_IDs     UUID\[\]                                                       Array of post IDs (FK to posts.id)
-  COMMUNITY_IDs   UUID\[\]                                                       Array of community IDs and names \[id, name, id, name, ...\] (FK to communities.id) (FK to communities.name)
-  ADMIN           BOOL       NOT NULL. DEFAULT FALSE                             ADMIN FLAG
-  TAGS            UUID\[\]                                                       Array of tags for content recommendation
+  Column Name     Type         Constraints                                         Description                                                                                                Note
+  --------------- ------------ --------------------------------------------------- ---------------------------------------------------------------------------------------------------------- --------
+  ID              INT          PRIMARY KEY                                         Unique Identifier                                                                                  
+  EMAIL           TEXT         UNIQUE. NOT NULL                                    User\'s Email                                                                                      
+  USERNAME        TEXT         UNIQUE. NOT NULL. CHECK (LENGTH(USERNAME) \< 100)   Unique Username                                                                                    
+  PASSWORD        TEXT         NOT NULL. CHECK (LENGTH(PASSWORD) \< 1000)          Hashed password (argon2)                                                                           
+  SALT            TEXT         NOT NULL                                            Hashing salt (argon2)                                                                              
+  IMG_PATH        TEXT                                                             URL TO PP                                                                                                  UNUSED
+  POST_IDs        STR\[CSV\]                                                       Array of post IDs (FK to posts.id)                                                                 
+  LIKE_IDs        STR\[CSV\]                                                       Array of post IDs (FK to posts.id)                                                                 
+  DISLIKE_IDs     STR\[CSV\]                                                       Array of post IDs (FK to posts.id)                                                                 
+  COMMENT_IDs     STR\[CSV\]                                                       Array of post IDs (FK to posts.id)                                                                         UNUSED
+  COMMUNITY_IDs   STR\[CSV\]                                                       Array of community IDs and names \[id. name. id. name.\] (FK to communities.id) (FK to communities.name)   UNUSED
+  ADMIN           INT          NOT NULL. DEFAULT FALSE                             ADMIN FLAG                                                                                         
+  TAGS            STR\[CSV\]                                                       Array of tags for content recommendation                                                                   UNUSED
   ```
 
 ## 3.3 Posts
   ```
-  Column Name    Type        Constraints                        Description
-  -------------- ----------- ---------------------------------- ---------------------------------------------------------
-  POST_ID        INT         UNIQUE. NOT NULL                   Unique Identifier
-  TITLE          TEXT        NOT NULL. CHECK (LENGHT \< 1000)   Post title
-  MAIN_TEXT      TEXT        CHECK (LENGTH \< 100k)             Post body
-  AUTH_ID        INT         NOT NULL                           Author ID (FK. User.ID)
-  COM_ID         INT         NOT NULL                           Community ID (FK. Community.ID)
-  TIMESTAMP      INT         NOT NULL                           Time of post
-  LIKES          INT         NOT NULL. DEFAULT 0                Likes on post
-  DISLIKES       INT         NOT NULL. DEFAULT 0                Dislikes on post
+  Column Name    Type         Constraints                       Description                                               Notes
+  -------------- ------------ --------------------------------- --------------------------------------------------------- --------
+  POST_ID        INT          UNIQUE. NOT NULL                  Unique Identifier
+  TITLE          TEXT         NOT NULL. CHECK (LENGHT \< 100)   Post title
+  MAIN_TEXT      TEXT         CHECK (LENGTH \< 10k)             Post body
+  AUTH_ID        INT          NOT NULL                          Author ID (FK. User.ID)
+  COM_ID         INT          NOT NULL                          Community ID (FK. Community.ID)
+  TIMESTAMP      INT          NOT NULL                          Time of post
+  LIKES          INT          NOT NULL. DEFAULT 0               Likes on post
+  DISLIKES       INT          NOT NULL. DEFAULT 0               Dislikes on post
   POST_ID_REF    INT                                            Refference to original post (for reposts) (FK. Post.ID)
-  COMMENT_FLAG   BOOL        NOT NULL                           Indicates comment instead of post
-  COMMENT_CNT    INT         NOT NULL. DEFAULT 0                Comment count
-  Comments       INT\[\]                                        Array of post id\'s for comments (FK. Post.ID)
+  COMMENT_FLAG   INT          NOT NULL                          Indicates comment instead of post
+  COMMENT_CNT    INT          NOT NULL. DEFAULT 0               Comment count
+  Comments       STR\[CSV\]                                     Array of post id\'s for comments (FK. Post.ID)
+  IMG_PATH       TEXT                                           URL to post image
+  TAGS           STR\[CSV\]                                     Array of tags for content recommendation                  UNUSED
   ```
 
 ## 3.4 Feedback
@@ -68,7 +69,7 @@ Dedicated com-port for API: 5047
   id            INT      PRIMARY KEY AUTO_INCREMENT   Unique identifier for each feedback entry
   worked        STRING   NOT NULL                     what worked
   didnt         STRING   NOT NULL                     what didnt work
-  feedback      STRING                                additional feedback
+  Other         STRING                                additional feedback
   rating        INT      NOT NULL                     rating from 1 to 5
   timestamp     INT      NOT NULL                     timestamp of feedback entry
 ```
@@ -140,11 +141,13 @@ Response:
 ### 4.2.2 Delete User Account
 Endpoint: `DELETE /api/user/remove/{user_id}`
 desc: Deletes the account
+Note: **Unused**  
 Response: `200 (ok)`
 
 ### 4.2.3 Update User Profile  (user)
 Endpoint: `PUT /api/user/update/user/{user_id}`
 desc: Updates user profile
+Note: **Not Implemented**  
 Request body:
 ```json
   {
@@ -318,6 +321,7 @@ Response:
 ### 4.4.3 Update post (user)
 Endpoint: `PUT /api/post/update/user/{post_id}`
 desc: Edits post
+Note: **Unused**
 Request:
 ```json
   {
@@ -343,6 +347,7 @@ Response: `200 (ok)`
 ### 4.4.5 Delete post
 Endpoint: `DELETE /api/post/remove/{post_id}`
 Desc: Deletes post
+Note: **Unused**
 Response: `200 (ok)`
 
 ### 4.4.6 Get Multiple Posts
@@ -462,6 +467,7 @@ Response: `200 (ok)`
 ### 4.5.2 Get User Vote Status
 Endpoint: `GET /api/post/{post_id}/vote/{user_id}`
 Description: Check if a user has liked/disliked a post
+Note: **Not implemented**
 Response:
 ```json
   {
@@ -487,6 +493,7 @@ Search flags and filters are handled backend
 ### 4.6.1 Search Posts
 Endpoint: `GET /api/search/posts`
 Desc: searches accross all posts
+Note: **Not implemented**  
 Query parameter: `?q={keywords}`
 Response:
 ```json
@@ -505,6 +512,7 @@ Response:
 ### 4.6.2 Search Communities
 Endpoint: `GET /api/search/communities`
 Desc: searches accross all communities
+Note: **Not implemented**  
 Query parameter: `q?={keywords}`
 Response:
 ```json
@@ -523,6 +531,7 @@ Response:
 ### 4.6.3 Search user
 Endpoint: `GET /api/search/users`
 Desc: Searches across all users
+Note: **Not implemented**  
 Query parameter: `q?={keywords}`
 Response:
 ```json
@@ -555,7 +564,7 @@ Request:
 ### 4.7.2 Retrieve feedback
 Endpoint: `GET: /api/feedback/all`
 Desc: Retrieve all feedback
-notes: may not be used
+Note: **Unused**
 Response:
 ```json
   {
@@ -574,24 +583,6 @@ Response:
 # 5. Error handling
 ## 5.1 HTTP codes used
 - 200 (ok) | generic response when no response body is required
-- 204 (no content) | use when data entry is empty (so does exist, but only contains NULL)
 - 400 (bad request) | use when request body is malformed
 - 401 (unauthorised) | use when user is a) not found, or b) does not have privilege to perform action
 - 404 (not found) | use when data entry not found
-- 500 (internal server error) | use for all other exceptions
-
-## 5.2 Security
-- Tokens are generated backend, and stored temporarilæy till their expiration time (3600). Tokens are linked to user id's (stored locally in browser cookie) to validate session
-
-## 5.3 Versioning
-Versioning will be done via headers in suggested formmat
-```
-Description
-Date of last edit @ time of last edit
-project name @ current version [stable / not stable / not tested]
-
-Responsible editor @ Responsible team
-```
-
-# 6. Closing remarks
-Due to the extensive nature of the API, DB- and BE team should be cooperating on making it a reality
