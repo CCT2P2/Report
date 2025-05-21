@@ -1,16 +1,15 @@
-ID,Fixed,Title,Description,Severity,Affected Component,Impact Scope,Status
-1,Yes,Auth Bypass via DevTools - Voting,Users can bypass authentication checks using browser DevTools (F12) and cast votes as any user.,Medium,Backend,All Users,To Be Fixed in v1.2
-2,Yes,Auth Bypass via DevTools - User Deletion,Users can bypass authentication checks using DevTools and delete arbitrary user accounts.,High,Backend,All Users,To Be Fixed in v1.2
-4,Addressed,Chromium Crash via About Page,"Under certain conditions, the About Us page may crash Chromium-based browsers.",Low,Client-Side,Individual User,Will Not Fix
-5,No,Server Crash via About Page,"In very rare cases, specific interaction sequences on the About Us page can crash the server.",Low,Server-Side,All Users,Will Not Fix
-6,Yes,ESC Key Nonfunctional on Post Creation,Pressing `Esc` does not close the post creation modal as expected.,Very Low,Frontend,Individual User,May be fixed in v1.2
-7,Yes,ASCII Art Display Issue,ASCII art is improperly rendered due to missing newline characters.,Medium,Frontend,All Users,To Be Fixed in v1.2
-8,Yes,Feedback Rejection on Zero Rating,Submitting feedback with a rating of 0 results in a 400 Bad Request error.,Low,Frontend,All Users,To Be Fixed in v1.2
-9,No,Access Token Refresh Loop,"The frontend attempts to refresh access tokens repeatedly without backoff or error resolution, potentially spamming the backend and bloating logs.",Low,Frontend,All Users,May be fixed in v1.2
-10,No,Auth Failure: Invalid Callback URL,"The frontend frequently triggers ""InvalidCallbackUrl"" errors, likely due to misconfigured or mismatched OAuth callback URIs, leading to over 5,000 repeated errors.",Medium,Frontend/Auth,All Users,May be fixed in v1.2
-12,No,Missing WebRootPath,"Static file serving is broken due to an invalid or missing WebRootPath, impacting delivery of frontend assets.",Low,Backend/Static File Middleware,All Users,May be fixed
-13,No,JWT Token Expiration Exceptions,Repeated `SecurityTokenExpiredException` errors suggest either poor refresh handling or excessive reliance on expired tokens.,Medium,Backend/Auth,All Users,May Be Fixed in v1.2
-16,No,Comment Count Not Updating,"After submitting a comment, the comment count on the button does not update until manual refresh, leading to user confusion.",Low,Frontend/Comments,All Users,May Be Fixed in v1.2
-17,Yes,Settings Page Soft-Locks Session,"Toggling background opacity causes the settings menu to soft-lock, requiring a full re-login to restore functionality.",Medium,Frontend/Settings,All Users,To Be Fixed in v1.2
-18,Yes,Settings Not Persisted Across Sessions,"User settings are not saved or reloaded after session restoration, resetting preferences like background opacity.",Low,Frontend/Settings,All Users,May be fixed
-19,Yes,Logout on Post View Doesn’t Redirect,Logging out while viewing a post does not redirect to the login page; user remains on an inaccessible post page.,Low,Frontend/Auth Routing,All Users,To Be Fixed in v1.2
+ID,Status,Title,Description,Affected Component,Impact Scope
+0,Yes,Godkendelsesomgåelse via DevTools - Afstemning,Brugere kan omgå godkendelsestjek via browserens DevTools (F12) og stemme som en hvilken som helst bruger.,Backend,All Users
+1,Yes,Godkendelsesomgåelse via DevTools - Sletning af bruger,Brugere kan omgå godkendelsestjek via DevTools og slette vilkårlige brugerkonti.,Backend,All Users
+2,Addressed,Chromium nedbrud via Om os-siden,Under visse forhold kan siden Om os få Chromium-browsere til at gå ned.,Client-Side,Individual User
+3,No,Servernedbrud via Om os-siden,I meget sjældne tilfælde kan bestemte interaktioner på siden Om os få serveren til at gå ned.,Server-Side,All Users
+4,Yes,ESC-tast fungerer ikke ved oprettelse af opslag,Tryk på `Esc` lukker ikke oprettelsesvinduet som forventet.,Frontend,Individual User
+5,Yes,Problemer med visning af ASCII-kunst,ASCII-kunst vises forkert på grund af manglende linjeskift.,Frontend,All Users
+6,Yes,Feedback afvises ved vurdering 0,Indsendelse af feedback med vurdering 0 resulterer i en 400-fejl.,Frontend,All Users
+7,No,Uendelig opdateringssløjfe for adgangstoken,"Frontend forsøger gentagne gange at opdatere adgangstokens uden tilbageholdelse eller fejlretning, hvilket kan spamme backend og overfylde loggene.",Frontend,All Users
+8,No,Godkendelsesfejl: Ugyldig Callback-URL,"Frontend udløser ofte ""InvalidCallbackUrl""-fejl, sandsynligvis pga. forkert konfigurerede eller uoverensstemmende OAuth-callback-URL'er, hvilket fører til over 5.000 gentagelser.",Frontend/Auth,All Users
+9,No,Mangler WebRootPath,"Servering af statiske filer virker ikke pga. ugyldig eller manglende WebRootPath, hvilket påvirker leveringen af frontend-assets.",Backend/Static File Middleware,All Users
+10,No,Kommentarantal opdateres ikke,"Efter indsendelse af en kommentar opdateres antallet ikke før man manuelt opdaterer siden, hvilket forvirrer brugeren.",Frontend/Comments,All Users
+11,Yes,Indstillingsside låser sessionen,"Ændring af baggrundens gennemsigtighed låser indstillingsmenuen, og brugeren skal logge ind igen for at fortsætte.",Frontend/Settings,All Users
+12,Yes,Indstillinger gemmes ikke på tværs af sessioner,"Brugerindstillinger gemmes eller gendannes ikke efter sessionsgenoprettelse, så præferencer som baggrundens gennemsigtighed nulstilles.",Frontend/Settings,All Users
+13,Yes,Log ud ved opslag viser ikke login-siden,"Log ud mens man ser et opslag sender ikke brugeren tilbage til login-siden, men efterlader dem på en utilgængelig side.",Frontend/Auth Routing,All Users
