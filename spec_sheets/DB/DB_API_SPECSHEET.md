@@ -430,6 +430,22 @@ Response:
 Examples for using it:
 - Get posts by the id 1,2,3 and 4: `/api/post/postsids?ids=1,2,3,4`
 
+### 4.4.6 Upload Image
+Endpoint `POST /api/upload/image
+Request body:
+```json
+  {
+    "file": "FILE",
+  }
+```
+
+Response:
+```json
+{
+  "imageUrl": "string" 
+}
+```
+
 ## 4.5 Interactions
 ## 4.5 Interactions
 ### 4.5.1 Like / Dislike
