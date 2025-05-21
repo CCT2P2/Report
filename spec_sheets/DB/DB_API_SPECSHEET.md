@@ -430,7 +430,7 @@ Response:
 Examples for using it:
 - Get posts by the id 1,2,3 and 4: `/api/post/postsids?ids=1,2,3,4`
 
-### 4.4.6 Upload Image
+### 4.4.8 Upload Image
 Endpoint `POST /api/upload/image
 Request body:
 ```json
