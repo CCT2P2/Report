@@ -1,13 +1,15 @@
-Column Name,Type,Constraints,Description
-POST_ID,UUID,UNIQUE. NOT NULL,Unique Identifier
+Column Name,Type,Constraints,Description,Notes
+POST_ID,INT,UNIQUE. NOT NULL,Unique Identifier
 TITLE,TEXT,NOT NULL. CHECK (LENGHT < 100),Post title
 MAIN_TEXT,TEXT,CHECK (LENGTH < 10k),Post body
-AUTH_ID,UUID,NOT NULL,Author ID (FK. User.ID)
-COM_ID,UUID,NOT NULL,Community ID (FK. Community.ID)
-TIMESTAMP,TIMESTAMP,NOT NULL,Time of post
+AUTH_ID,INT,NOT NULL,Author ID (FK. User.ID)
+COM_ID,INT,NOT NULL,Community ID (FK. Community.ID)
+TIMESTAMP,INT,NOT NULL,Time of post
 LIKES,INT,NOT NULL. DEFAULT 0,Likes on post
 DISLIKES,INT,NOT NULL. DEFAULT 0,Dislikes on post
-POST_ID_REF,UUID,,Refference to original post (for reposts) (FK. Post.ID)
-COMMENT_FLAG,BOOL,NOT NULL,Indicates comment instead of post
+POST_ID_REF,INT,,Refference to original post (for reposts) (FK. Post.ID)
+COMMENT_FLAG,INT,NOT NULL,Indicates comment instead of post
 COMMENT_CNT,INT,NOT NULL. DEFAULT 0,Comment count
-Comments,UUID[],,Array of post id's for comments (FK. Post.ID)
+Comments,STR[CSV],,Array of post id's for comments (FK. Post.ID)
+IMG_PATH,TEXT,,URL to post image
+TAGS,STR[CSV],,Array of tags for content recommendation,UNUSED

@@ -1,8 +1,8 @@
-Column name,Type,Constraints,Description
-ID,UUID,PRIMARY KEY,Unique Identifier
+Column name,Type,Constraints,Description,Note
+ID,INT,PRIMARY KEY,Unique Identifier
 NAME,TEXT,UNIQUE. NOT NULL. CHECK (LENGTH(NAME) < 100),Community Name
 Description,TEXT,CHECK (LENGTH(description) < 500),Community description
-IMG_PATH,TEXT, ,URL to community image
+IMG_PATH,TEXT, ,URL to community image,UNUSED
 MEMBER_COUNT,INT,DEFAULT 0. NOT NULL, Number of members
-TAGS,UUID[],NOT NULL,Content tags
-POST_IDs,UUID[],,Array of post ID's (FK to posts.id)
+TAGS,STR[CSV],NOT NULL,Content tags,UNUSED
+POST_IDs,STR[CSV],,Array of post ID's (FK to posts.id)

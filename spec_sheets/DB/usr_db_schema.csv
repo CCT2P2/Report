@@ -1,14 +1,14 @@
-Column Name,Type,Constraints,Description
-ID,UUID,PRIMARY KEY,Unique Identifier
+Column Name,Type,Constraints,Description,Note
+ID,INT,PRIMARY KEY,Unique Identifier
 EMAIL,TEXT,UNIQUE. NOT NULL, User's Email
 USERNAME,TEXT,UNIQUE. NOT NULL. CHECK (LENGTH(USERNAME) < 100),Unique Username
 PASSWORD,TEXT,NOT NULL. CHECK (LENGTH(PASSWORD) < 1000), Hashed password (argon2)
 SALT, TEXT, NOT NULL, Hashing salt (argon2)
-IMG_PATH,TEXT,,URL TO PP
-POST_IDs,UUID[],,Array of post IDs (FK to posts.id)
-LIKE_IDs,UUID[],,Array of post IDs (FK to posts.id)
-DISLIKE_IDs,UUID[],,Array of post IDs (FK to posts.id)
-COMMENT_IDs,UUID[],,Array of post IDs (FK to posts.id)
-COMMUNITY_IDs,UUID[],,Array of community IDs and names [id. name. id. name.] (FK to communities.id) (FK to communities.name)
-ADMIN,BOOL,NOT NULL. DEFAULT FALSE,ADMIN FLAG
-TAGS,UUID[],,Array of tags for content recommendation
+IMG_PATH,TEXT,,URL TO PP,UNUSED
+POST_IDs,STR[CSV],,Array of post IDs (FK to posts.id)
+LIKE_IDs,STR[CSV],,Array of post IDs (FK to posts.id)
+DISLIKE_IDs,STR[CSV],,Array of post IDs (FK to posts.id)
+COMMENT_IDs,STR[CSV],,Array of post IDs (FK to posts.id), UNUSED
+COMMUNITY_IDs,STR[CSV],,Array of community IDs and names [id. name. id. name.] (FK to communities.id) (FK to communities.name),UNUSED
+ADMIN,INT,NOT NULL. DEFAULT FALSE,ADMIN FLAG
+TAGS,STR[CSV],,Array of tags for content recommendation,UNUSED
