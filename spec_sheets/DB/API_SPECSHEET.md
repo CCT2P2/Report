@@ -37,6 +37,9 @@ Dedicated com-port for API: 5000
   LIKE_IDs        STR\[CSV\]                                                       Array of post IDs (FK to posts.id)                                                                 
   DISLIKE_IDs     STR\[CSV\]                                                       Array of post IDs (FK to posts.id)                                                                 
   COMMENT_IDs     STR\[CSV\]                                                       Array of post IDs (FK to posts.id)                                                                         UNUSED
+
+  DISPLAY_NAME    TEXT                                                             Users display name 
+                              UNUSED
   COMMUNITY_IDs   STR\[CSV\]                                                       Array of community IDs and names \[id. name. id. name.\] (FK to communities.id) (FK to communities.name)   UNUSED
   ADMIN           INT          NOT NULL. DEFAULT FALSE                             ADMIN FLAG                                                                                         
   TAGS            STR\[CSV\]                                                       Array of tags for content recommendation                                                                   UNUSED
