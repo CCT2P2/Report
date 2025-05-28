@@ -1,34 +1,5 @@
-Indsamling og analyse af cancer patienters livstilsforhold, samt genetiske forhold (cancer type ikke besluttet på nuvlrende tidspunkt) for opbygning af en model som kan bruges til forudsigning af cancer, samt hjælp til minimering
+# GNUF - The GNU Forum
+This is our second term project on Aalborg universities B.Sc in computer engineering.
+The goal was to develop a project with complex data management, and we decided to create a social media from scratch!
 
-# refinement
--------------------
-- Social medie
-- målgruppen: computer enthusiaster
-- alder: 16+
-- frontend: react, tailwindcss, next.js, zustand, zod, auth.js, shadcn
-- backend; sqllite (db), c#
-- reddit like forum (GNUF)
-- annonymitet videst muligt, dog stadig med login or bruger profiler
-
-# Irritationspunkter
-- ingen like/dislike ratio | lav en
-- ingen dislike (youtube) | lav en
-- notifikation center rod | organiser med kategorier og prioriteter
-- meget general purpose, mangler specificering
-- algoritmerne kan ikke promote ordentlig content | Mere bruger kontrol over algorithmerne bla.
-
-# forslag
-- profil customization with pre defined colour paletes and more
-
-# problemstilling
-hvordan kan man skabe et socialt media med fokus på anonumitet, computer og it enthusiaster, samt forbedre nuværende sociale mediers UX
-
-# tools
-- code2flow
-- krita
-- git
-- vim/zed/jetbrain/vscode
-- discord
-- typst
-- k3s
-- plantuml
+For more info please check `Report_final.pdf` where you will find all the details, or check the other repositories for the code.
